@@ -91,35 +91,35 @@ export default () => {
   /* Change this according to your needs */
   const cards = [
     {
-      imageSrc: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&h=1024&w=768&q=80",
-      title: "Wyatt Residency",
-      description: "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
-      locationText: "Rome, Italy",
-      pricingText: "USD 39/Day",
+      imageSrc: "https://images.fresha.com/locations/location-profile-images/304368/543840/88bdb313-a680-4bea-aeeb-03390eea81f8.jpg?class=width-large",
+      title: "DreamDaySpa",
+      description: "We are the best Spa in Lagos Nigeria. We offer Spa Body Treatment, Aesthetic Treatment, Various Massages, Skin Analysis, Skin care, Manicure and Pedicure. Our services are suitable for men, women and kids.",
+      locationText: "Lagos, Nigeria",
+      // pricingText: "USD 39/Day",
       rating: "4.8",
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&h=1024&w=768&q=80",
-      title: "Soho Paradise",
-      description: "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
-      locationText: "Ibiza, Spain",
-      pricingText: "USD 50/Day",
+      imageSrc: "https://images.fresha.com/locations/location-profile-images/440109/756121/4fd2e845-cd8c-41b4-945d-e55baf38c543.jpg?class=width-large",
+      title: "RahnaBeauty Makeup Artistry",
+      description: "A Makeup Studio catering to the beauty needs of women. We offer Makeup services for; bridals, birthday celebrations, brand campaigns, event guests, we also teach and empower makeup artists & enthusiasts on the how & why of makeup application and processes",
+      locationText: "Lagos, Nigeria",
+      // pricingText: "USD 50/Day",
       rating: 4.9,
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&h=1024&w=768&q=80",
-      title: "Hotel Baja",
-      description: "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
-      locationText: "Palo Alto, CA",
-      pricingText: "USD 19/Day",
+      imageSrc: "https://images.fresha.com/locations/location-profile-images/343195/428815/99ddb1f6-bfe0-4e9a-ad20-62f63e4c1419.jpg?class=width-large",
+      title: "Veeda Beauty Lounge",
+      description: "Veeda beauty lounge is a full-service beauty salon dedicated to consistently providing high customer satisfaction by rendering excellent service, quality products, and furnishing an enjoyable atmosphere at an acceptable price ",
+      locationText: "FCT, Nigeria",
+      // pricingText: "USD 19/Day",
       rating: "5.0",
     },
     {
-      imageSrc: "https://images.unsplash.com/photo-1571770095004-6b61b1cf308a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&h=1024&w=768&q=80",
-      title: "Hudak Homes",
-      description: "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
-      locationText: "Arizona, RAK",
-      pricingText: "USD 99/Day",
+      imageSrc: "https://images.fresha.com/locations/location-profile-images/350076/380247/41d11805-d7f5-40ff-a321-00bf8bff7095.jpg?class=width-large",
+      title: "The Hikkys Hair Studio",
+      description: "Hikky's Hair is a brand passionate about enhancing the beauty of the modern-day African woman through quality hair and haircare. Our services revolve around the sale of quality Human Hair Extensions, Natural hair care, Installation, Microlinks ,LA Weave, Wig fitting, Wig making, Wig laundry, Colouring services and more.",
+      locationText: "Port Harcourt, Nigeria",
+      // pricingText: "USD 99/Day",
       rating: 4.5,
     },
   ]
@@ -128,7 +128,7 @@ export default () => {
     <Container>
       <Content>
         <HeadingWithControl>
-          <Heading>Popular Hotels</Heading>
+          <Heading>Popular Services</Heading>
           <Controls>
             <PrevButton onClick={sliderRef?.slickPrev}><ChevronLeftIcon/></PrevButton>
             <NextButton onClick={sliderRef?.slickNext}><ChevronRightIcon/></NextButton>
@@ -153,12 +153,12 @@ export default () => {
                     </IconContainer>
                     <Text>{card.locationText}</Text>
                   </IconWithText>
-                  <IconWithText>
+                  {/* <IconWithText>
                     <IconContainer>
                       <PriceIcon />
                     </IconContainer>
                     <Text>{card.pricingText}</Text>
-                  </IconWithText>
+                  </IconWithText> */}
                 </SecondaryInfoContainer>
                 <Description>{card.description}</Description>
               </TextInfo>

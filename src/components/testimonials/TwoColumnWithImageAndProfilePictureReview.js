@@ -68,7 +68,7 @@ const DecoratorBlob2 = tw(
 export default ({
   subheading = "",
   heading = "Testimonials",
-  description = "Here are what some of our amazing customers are saying about our hotels & tours. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  description = "Hear what our customers are saying about Reservely - the ultimate booking platform. Don't just take our word for it - read our customer reviews and see for yourself!",
   testimonials = null,
   textOnLeft = false
 }) => {
@@ -78,24 +78,24 @@ export default ({
    */
   const defaultTestimonials = [
     {
-      imageSrc:
-        "https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&q=80",
+      // imageSrc:
+      //   "https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&q=80",
       profileImageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+        "https://cdn-gatekeeper-uploads.fresha.com/avatars/9218021/medium/078fe68d-f58f-48c6-9dc0-69b82b289bc8-B4D45607-9A94-4EED-ACC2-CE0FCBB14ED7.jpeg?v=63786816420",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Charlotte Hale",
-      customerTitle: "CEO, Delos Inc."
+        "Reservely's reminders make life so much easier. I also found a few good hair salons and lash techs that I didn’t know existed.",
+      customerName: "Gaile Ola Nnenna U.",
+      // customerTitle: "CEO, Delos Inc."
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1523952578875-e6bb18b26645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
+       "https://img.freepik.com/free-vector/woman-choosing-her-dates-appointment-booking_23-2148552970.jpg?w=740&t=st=1679444820~exp=1679445420~hmac=19d43d50224af052ebb84e6ec7907c5bf79a46b5c9ab0e04712f441441a09892",
       profileImageSrc:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=512&h=512&q=80",
+        "https://cdn-gatekeeper-uploads.fresha.com/avatars/10346686/medium/AOh14GhTebXUxP3QkLWycR2ezDLNGYn5ReU6LURG1mFN_wU=s96-c?v=63792000998",
       quote:
-        "Sinor Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Adam Cuppy",
-      customerTitle: "Founder, EventsNYC"
+        "Recently moved to a new city and didn't know any salons. Fresha gave me a whole new list to choose from!",
+      customerName: "Rita E.",
+      // customerTitle: "Founder, EventsNYC"
     }
   ];
 

@@ -59,23 +59,23 @@ export default () => {
   const cards = [
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1553194587-b010d08c6c56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80",
-      type: "Beachfront",
-      pricePerDay: "$99",
-      title: "A Trip to the Bahamas and the Carribean Ocean",
+        "https://images.fresha.com/locations/location-profile-images/46355/737657/fbddebcc-c45a-4a6f-a3f1-84a6339f60cf.jpg?class=width-large",
+      type: "Beauty & Hair Salon",
+      // pricePerDay: "$99",
+      title: "TasalaHQ Hair and Beauty - Lekki",
       trendingText: "Trending",
-      durationText: "7 Days Tour",
-      locationText: "Africa"
+      // durationText: "7 Days Tour",
+      locationText: "Lagos, Nigeria"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1584200186925-87fa8f93be9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80",
+        "https://images.fresha.com/locations/location-profile-images/132500/574012/1d305c41-0932-4f00-b458-7fc603dede70.jpg?class=width-large",
       type: "Cruise",
-      pricePerDay: "$169",
-      title: "Cruise to the Mariana Trench and the Phillipines",
+      // pricePerDay: "$169",
+      title: "Gazelle Wax Bar - Wuse 2",
       trendingText: "Trending",
-      durationText: "15 Days Tour",
-      locationText: "Australia"
+      // durationText: "15 Days Tour",
+      locationText: "FCT, Nigeria"
     }
   ];
   return (
@@ -84,13 +84,12 @@ export default () => {
         <ThreeColumn>
           <HeadingColumn>
             <HeadingInfoContainer>
-              <HeadingTitle>Trending Tours</HeadingTitle>
+              <HeadingTitle>Trending Services</HeadingTitle>
               <HeadingDescription>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua enim ad minim veniam.
+              Don't miss out on the best of the best - explore our trending services.
               </HeadingDescription>
               <PrimaryLink>
-                View All Tours <ArrowRightIcon />
+                View All <ArrowRightIcon />
               </PrimaryLink>
             </HeadingInfoContainer>
           </HeadingColumn>
@@ -99,20 +98,20 @@ export default () => {
               <Card>
                 <CardImage imageSrc={card.imageSrc} />
                 <CardText>
-                  <CardHeader>
+                  {/* <CardHeader>
                     <CardType>{card.type}</CardType>
                     <CardPrice>
                       <CardPriceAmount>{card.pricePerDay}</CardPriceAmount> per day
                     </CardPrice>
-                  </CardHeader>
+                  </CardHeader> */}
                   <CardTitle>{card.title}</CardTitle>
                   <CardMeta>
                     <CardMetaFeature>
                       <TrendingIcon /> {card.trendingText}
                     </CardMetaFeature>
-                    <CardMetaFeature>
+                    {/* <CardMetaFeature>
                       <TimeIcon /> {card.durationText}
-                    </CardMetaFeature>
+                    </CardMetaFeature> */}
                     <CardMetaFeature>
                       <LocationIcon /> {card.locationText}
                     </CardMetaFeature>
