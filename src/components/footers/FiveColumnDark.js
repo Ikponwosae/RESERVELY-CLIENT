@@ -48,13 +48,13 @@ export default () => {
           <CompanyColumn>
             <LogoContainer>
               <LogoImg src={LogoImage} />
-              <LogoText>Treact Inc.</LogoText>
+              <LogoText>Reservely Inc.</LogoText>
             </LogoContainer>
-            <CompanyAddress>
+            {/* <CompanyAddress>
               123 Road, New Startup Building
               Carter Road, San Francisco
               California 40234
-            </CompanyAddress>
+            </CompanyAddress> */}
             <SocialLinksContainer>
               <SocialLink href="https://facebook.com">
                 <FacebookIcon />
@@ -70,9 +70,9 @@ export default () => {
           <Column>
             <ColumnHeading>Quick Links</ColumnHeading>
             <LinkList>
-              <LinkListItem>
+              {/* <LinkListItem>
                 <Link href="#">Blog</Link>
-              </LinkListItem>
+              </LinkListItem> */}
               <LinkListItem>
                 <Link href="#">FAQs</Link>
               </LinkListItem>
@@ -122,10 +122,10 @@ export default () => {
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                +1 (234) (567)-8901
+                +234 (809) (768)-864-88
               </LinkListItem>
               <LinkListItem>
-                <Link href="mailto:support@servana.com">support@servana.com</Link>
+                <Link href="mailto:support@servana.com">support@Reservely.com</Link>
               </LinkListItem>
               <LinkListItem>
                 <Link href="#">Sales</Link>
@@ -138,8 +138,8 @@ export default () => {
         </FiveColumns>
         <Divider/>
         <CopyrightAndCompanyInfoRow>
-          <CopyrightNotice>&copy; Copyright 2020, Treact Inc.</CopyrightNotice>
-          <CompanyInfo>An Internet Company.</CompanyInfo>
+          <CopyrightNotice>&copy; Copyright 2020, Reservely Inc.</CopyrightNotice>
+          <CompanyInfo>An appointment scheduling company</CompanyInfo>
         </CopyrightAndCompanyInfoRow>
       </Content>
     </Container>

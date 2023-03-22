@@ -55,19 +55,19 @@ export default ({
     {
       imageSrc: ShieldIconImage,
       title: "Secure",
-      description: "We strictly only deal with vendors that provide top notch security.",
+      description: "Experience peace of mind with Reservely's top-notch security measures, ensuring your personal information are always safe and secure",
       url: "https://timerse.com"
     },
     {
       imageSrc: SupportIconImage,
       title: "24/7 Support",
-      description: "Lorem ipsum donor amet siti ceali placeholder text",
+      description: "Rest easy knowing that our 24/7 support team is always here to help you, no matter the time or day.",
       url: "https://google.com"
     },
     {
       imageSrc: CustomizeIconImage,
       title: "Customizable",
-      description: "Lorem ipsum donor amet siti ceali placeholder text",
+      description: "Tailor Reservely to your needs - our platform is fully customizable.",
       url: "https://reddit.com"
     }
   ],

@@ -28,24 +28,24 @@ export default ({
   testimonials = [
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
+        "https://cdn-gatekeeper-uploads.fresha.com/avatars/24541683/medium/unnamed.jpg?v=63845063079",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Charlotte Hale"
+        "Recently moved to a new state and didn't know any salons. Reservely gave me a whole new list to choose from!",
+      customerName: "Ifiok-Abasi E."
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=512&h=512&q=80",
+        "https://cdn-gatekeeper-uploads.fresha.com/avatars/24676209/medium/unnamed.jpg?v=63845508229",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Adam Cuppy"
+        "Reservely makes it easy to book my salon and beauty appointments anytime I want, rather than having to wait until the salon is open.",
+      customerName: "Atonye A."
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1580852300654-03c803a14e24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4.25&w=512&h=512&q=80",
+        "https://cdn-gatekeeper-uploads.fresha.com/avatars/10346686/medium/AOh14GhTebXUxP3QkLWycR2ezDLNGYn5ReU6LURG1mFN_wU=s96-c?v=63792000998",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Steven Marcetti"
+        "Reservely is my go-to app for massages and facials. I can easily find and book places near me — I love it!",
+      customerName: "Dumebi Stacy"
     }
   ]
 }) => {
