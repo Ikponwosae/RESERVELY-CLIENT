@@ -2,7 +2,6 @@
 import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-// import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
@@ -10,6 +9,7 @@ import { Formik } from "formik";
 import { Routs } from "../../routs";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import * as Yup from 'yup';
+
 
 // inital login credentials
 const initialValues = {
@@ -26,16 +26,20 @@ const validationSchema = Yup.object().shape({
 });
 
 const JwtLogin = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/"
   const { login } = useAuth();
 
   const handleFormSubmit = async (values) => {
     setLoading(true);
+
     try {
-      await login(values.email, values.password);
-      navigate('/shop-owner/dashboard');
+      const user = await login(values.email, values.password);
+      user.role.toString() === "shop-owner" ? navigate(Routs.ShopOwnerDashboard.path)
+      :user.role.toString() === "staff" ? navigate(Routs.StaffDashboard.path)
+      : navigate(Routs.UserDashboard.path)
     } catch (e) {
       setLoading(false);
     }
@@ -106,30 +110,17 @@ const JwtLogin = () => {
                     </Card.Link>
                     </div>
                   </Form.Group>
-                  <Card.Link as={Link} to={Routs.DashboardOverview.path} className="fw-bold">
+                  {/* <Card.Link as={Link} to={Routs.DashboardOverview.path} className="fw-bold"> */}
                     <Button variant="outline-primary" type="submit" loading={loading} className="w-100">
                                         Sign in
                                       </Button>
-                  </Card.Link>
+                  {/* </Card.Link> */}
                   
                 </Form>
               )}
                 </Formik>
 
-                {/* <div className="mt-3 mb-4 text-center">
-                  <span className="fw-normal">or login with</span>
-                </div>
-                <div className="d-flex justify-content-center my-4">
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-facebook me-2">
-                    <FontAwesomeIcon icon={faFacebookF} />
-                  </Button>
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-twitter me-2">
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </Button>
-                  <Button variant="outline-light" className="btn-icon-only btn-pil text-dark">
-                    <FontAwesomeIcon icon={faGithub} />
-                  </Button>
-                </div> */}
+                
                 <div className="d-flex justify-content-center align-items-center mt-4">
                   <span className="fw-normal">
                     Not registered?

@@ -49,11 +49,7 @@ const JwtRegister = () => {
         values.password,
         values.address,
         values.role);
-      if(values.role === "shop-owner") {
         navigate('/send-verify');
-      }else{
-        navigate('/');
-      }
       setLoading(false);
     } catch (e) {
       console.log(e);

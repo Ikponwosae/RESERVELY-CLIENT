@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Breadcrumb, Button, ButtonGroup, Row, Col, InputGroup, Form, Dropdown, Modal, Card, Table } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus, faCog, faCheck, faSearch, faSlidersH, faPause } from '@fortawesome/free-solid-svg-icons';
-import users from '../../data/users';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import Sidebar from "components/Sidebar";
 import ScrollToTop from "components/ScrollToTop";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+import useStaff from "hooks/useStaff";
 
 
+const GetStaff = () => {
+    const [staffs, setStaffs] = useState([])
+    const { getStaff } = useStaff
+    
+    useEffect(() => {
+        getStaff()
+        setStaffs(staffs)
 
-export default () => {
+    }, [getStaff, staffs])
+
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
     return (
@@ -26,7 +34,7 @@ export default () => {
             <Breadcrumb className="d-none d-md-inline-block" listProps={{ className: "breadcrumb-dark breadcrumb-transparent" }}>
                 <Breadcrumb.Item><FontAwesomeIcon icon={faHome} /></Breadcrumb.Item>
                 <Breadcrumb.Item>Reservely</Breadcrumb.Item>
-                <Breadcrumb.Item active>Users List</Breadcrumb.Item>
+                <Breadcrumb.Item active>Staff List</Breadcrumb.Item>
             </Breadcrumb>
             <h4>Staffs List</h4>
             <p className="mb-0">All your staff and their Details.</p>
@@ -105,20 +113,19 @@ export default () => {
                                 <th className="border-bottom">Registration Date</th>
                                 <th className="border-bottom">Action</th>
                             </tr>
-                            {users.map(u => (
-                            <tr key={u.key}>
+                            {staffs.map(s => (
+                            <tr key={s._id}>
                                 <td>
                                     <Card.Link className="d-flex align-items-center">
-                                        {/* <Image src={u.image} className="user-avatar rounded-circle me-3" /> */}
                                         <div className="d-block">
-                                            <span className="fw-bold">{u.firstName}</span>
+                                            <span className="fw-bold">{s.firstName}</span>
                                         </div>
                                     </Card.Link>
                                 </td>
-                                <td><span className="fw-bold">{u.lastName}</span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{u.email}</div></span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{u.status}</div></span></td>
-                                <td><span className="fw-normal">{u.dateCreated}</span></td>
+                                <td><span className="fw-bold">{s.lastName}</span></td>
+                                <td><span className="fw-normal"><div className="small text-gray">{s.email}</div></span></td>
+                                <td><span className="fw-normal"><div className="small text-gray">{s.status}</div></span></td>
+                                <td><span className="fw-normal">{s.createdAt}</span></td>
                                 <td>
                                 <Button variant="warning" size="xs" className="text-dark" onClick={() => setShowDefault(true)}>
                                     <FontAwesomeIcon icon={faPause} className="me-2" /> SUSPEND
@@ -156,3 +163,5 @@ export default () => {
         </>
     );
 };
+
+export default GetStaff

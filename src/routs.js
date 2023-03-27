@@ -32,6 +32,11 @@ export const Routs = {
     EditService: { path: "/shop-owner/edit-service"},
     WaitList: { path: "/shop-owner/waitlist"},
 
+    //STAFF
+    StaffDashboard: { path : "staff/dashboard"},
+
+    //USER
+    UserDashboard: { path : "user/dashboard"},
 
     // docs
     DocsOverview: { path: "/documentation/overview" },

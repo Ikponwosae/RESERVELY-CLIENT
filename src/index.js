@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import App from "./App";
 import Modal from "react-modal";
 import * as serviceWorker from "./serviceWorker";
-// import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "contexts/JWTAuthContext";
 
 // import ReactDOM from 'react-dom';
 
@@ -18,7 +19,13 @@ Modal.setAppElement("#root");
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <App />
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
      );
 
 

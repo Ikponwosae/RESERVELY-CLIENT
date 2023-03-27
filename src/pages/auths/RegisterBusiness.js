@@ -1,31 +1,87 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faBusinessTime, faCalendarTimes, faEnvelope, faEnvelopeOpenText, faFlag, faHome, faIdCard, faPeopleArrows, faPhone, faSortNumericUp, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBusinessTime, faCalendarTimes, faEnvelopeOpenText, faFlag, faPeopleArrows, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup } from '@themesberg/react-bootstrap';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 import { Routs } from "../../routs";
+import useAuth from "hooks/useAuth";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
 
+//initial credentials
+const initialValues = {
+  name: '',
+  hasPhysicalAddress: '',
+  category: '',
+  description: '',
+  website: '',
+  regNumber: '',
+  country: '',
+  openHour: '',
+  closeHour: '',
+  teamSize: ''
+};
 
-export default () => {
+//form field validations
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Business name is required!'),
+  hasPhysicalAddress: Yup.string()
+    .required('Field is required!'),
+  openHour: Yup.string()
+    .required('Opening Hour is required!'),
+  closeHour: Yup.string()
+  .required('Closing hour is required!'),
+});
+
+const BusinessReg = () => {
+  const { registerBusiness } = useAuth();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleFormSubmit = (values) => {
+    setLoading(true);
+
+    try {
+      registerBusiness(
+        values.name,
+        values.hasPhysicalAddress,
+        values.category,
+        values.description,
+        values.website,
+        values.regNumber,
+        values.country,
+        values.openHour,
+        values.closeHour,
+        values.teamSize
+        );
+        navigate(Routs.Signin.path);
+        setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  }
+
   return (
     <main>
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
-          {/* <p className="text-center">
-            <Card.Link as={Link} to={Routs.HomePage.path} className="text-gray-700">
-              <FontAwesomeIcon icon={faAngleLeft} className="me-2" /> Back to homepage
-            </Card.Link>
-          </p> */}
           <Row className="justify-content-center form-bg-image" style={{ backgroundImage: `url(${BgImage})` }}>
             <Col xs={12} className="d-flex align-items-center justify-content-center">
               <div className="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Register Your Business</h3>
                 </div>
+              <Formik
+              onSubmit={handleFormSubmit}
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              >  
+              {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
                 <Form className="mt-4">
                 <Form.Group id="name" className="mb-4">
                     <Form.Label>Business Name</Form.Label>
@@ -33,7 +89,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faBusinessTime} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus required type="text" placeholder="Amy Holdings" />
+                      <Form.Control autoFocus required type="text"
+                      name="name"
+                      onBlur={handleBlur}
+                      value={values.name}
+                      onChange={handleChange}
+                      helperText={touched.name && errors.name}
+                      error={Boolean(errors.name && touched.name)}
+                      placeholder="Amy Holdings" />
                     </InputGroup>
                   </Form.Group>
                   
@@ -43,7 +106,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faFirefoxBrowser} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="text" placeholder="www.pins.com.ng" />
+                      <Form.Control autoFocus type="text"
+                      name="websitw"
+                      onBlur={handleBlur}
+                      value={values.website}
+                      onChange={handleChange}
+                      helperText={touched.website && errors.website}
+                      error={Boolean(errors.website && touched.website)}
+                      placeholder="www.pins.com.ng" />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group id="regNum" className="mb-4">
@@ -52,24 +122,43 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faSortNumericUp} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="text" placeholder="AB73HFM32" />
+                      <Form.Control autoFocus type="text"
+                      name="regNumber"
+                      onBlur={handleBlur}
+                      value={values.regNumber}
+                      onChange={handleChange}
+                      helperText={touched.regNumber && errors.regNumber}
+                      error={Boolean(errors.regNumber && touched.regNumber)}
+                      placeholder="AB73HFM32" />
                     </InputGroup>
                   </Form.Group>
               <Form.Group className="mb-4" id="hasPhysicalAddress">
               <Form.Label>Has Physical Adress</Form.Label>
-              <Form.Select>
-                <option default>true</option>
-                <option>false</option>
+              <Form.Select
+              name="hasPhysicalAddress"
+              onBlur={handleBlur}
+              value={values.hasPhysicalAddress}
+              onChange={handleChange}
+              helperText={touched.hasPhysicalAddress && errors.hasPhysicalAddress}
+              error={Boolean(errors.hasPhysicalAddress && touched.hasPhysicalAddress)}>
+                <option defaultValue value="true">true</option>
+                <option value="false">false</option>
               </Form.Select>
             </Form.Group>
               <Form.Group className="mb-4" id="category">
               <Form.Label>Category</Form.Label>
-              <Form.Select>
+              <Form.Select
+              name="category"
+              onBlur={handleBlur}
+              value={values.category}
+              onChange={handleChange}
+              helperText={touched.category && errors.category}
+              error={Boolean(errors.category && touched.category)}>
                 <option defaultValue>Open this menu</option>
-                <option>Beauty</option>
-                <option>Hair</option>
-                <option>Shopping</option>
-                <option>Food</option>
+                <option value="beauty">Beauty</option>
+                <option value="hair">Hair</option>
+                <option value="shopping">Shopping</option>
+                <option value="food">Food</option>
               </Form.Select>
               </Form.Group>
               <Form.Group id="description" className="mb-4">
@@ -78,7 +167,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelopeOpenText} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus required type="text" placeholder="We offer these services.." />
+                      <Form.Control autoFocus required type="text"
+                      name="description"
+                      onBlur={handleBlur}
+                      value={values.description}
+                      onChange={handleChange}
+                      helperText={touched.description && errors.description}
+                      error={Boolean(errors.description && touched.description)}
+                      placeholder="We offer these services.." />
                     </InputGroup>
                 </Form.Group>
               <Form.Group id="team" className="mb-4">
@@ -87,7 +183,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faPeopleArrows} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="number" placeholder="10" />
+                      <Form.Control autoFocus type="number"
+                      name="teamSize"
+                      onBlur={handleBlur}
+                      value={values.teamSize}
+                      onChange={handleChange}
+                      helperText={touched.teamSize && errors.teamSize}
+                      error={Boolean(errors.teamSize && touched.teamSize)}
+                      placeholder="10" />
                     </InputGroup>
                 </Form.Group>
                 <Form.Group id="country" className="mb-4">
@@ -96,7 +199,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faFlag} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="text" placeholder="Nigeria" />
+                      <Form.Control autoFocus type="text"
+                      name="country"
+                      onBlur={handleBlur}
+                      value={values.country}
+                      onChange={handleChange}
+                      helperText={touched.country && errors.country}
+                      error={Boolean(errors.country && touched.country)}
+                      placeholder="Nigeria" />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group id="open" className="mb-4">
@@ -105,7 +215,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faCalendarTimes} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="text" placeholder="09:00" />
+                      <Form.Control autoFocus required type="text"
+                      name="openHour"
+                      onBlur={handleBlur}
+                      value={values.openHour}
+                      onChange={handleChange}
+                      helperText={touched.openHour && errors.openHour}
+                      error={Boolean(errors.openHour && touched.openHour)}
+                      placeholder="09:00" />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group id="close" className="mb-4">
@@ -114,7 +231,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faCalendarTimes} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus type="text" placeholder="18:30" />
+                      <Form.Control autoFocus required type="text"
+                      name="closeHour"
+                      onBlur={handleBlur}
+                      value={values.closeHour}
+                      onChange={handleChange}
+                      helperText={touched.closeHour && errors.closeHour}
+                      error={Boolean(errors.closeHour && touched.closeHour)}
+                      placeholder="18:30" />
                     </InputGroup>
                   </Form.Group>
                 
@@ -125,10 +249,12 @@ export default () => {
                     </FormCheck.Label>
                   </FormCheck> 
 
-                  <Button variant="outline-primary" type="submit" className="w-100">
+                  <Button variant="outline-primary" type="submit" loading={loading} className="w-100">
                     Register Business
                   </Button>
                 </Form>
+              )}
+                </Formik>
 
                 
                 {/* <div className="d-flex justify-content-center align-items-center mt-4">
@@ -147,3 +273,5 @@ export default () => {
     </main>
   );
 };
+
+export default BusinessReg;

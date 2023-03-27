@@ -6,31 +6,32 @@ import { Col, Row, Button, Container } from '@themesberg/react-bootstrap';
 import useAuth from "hooks/useAuth";
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Routs } from "../../routs";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 // import SentImage from "../../assets/img/illustrations/500.svg";
 
 
-const CompleteReg =  async () => {
+const CompleteReg = () => {
   const { completeRegistration } = useAuth();
   const navigate = useNavigate();
   // const [ loading, setLoading] = useState(false);
   const token = (window.location.href).split("/")[4];
+
+      const activate = async () =>{
+        try{
+        // setLoading(true);
+        const {user}  = await completeRegistration(token);
+        if(user.role === "shop-owner"){
+          navigate(`/register-business/${user.id}`)
+          console.log('hello')
+        }else{
+        navigate('/login')
+        console.log('hi')
+        }
+      } catch(err){
+        console.log(err);
+      }  
+      }
   
-  
-  try{
-    // setLoading(true);
-    const {user}  = await completeRegistration(token);
-    console.log(user)
-    console.log(user.role)
-    if((user.role).toString() === "shop-owner"){
-      navigate(`/register-business/${user.id}`)
-    }else{
-    navigate('/login')
-    }
-  } catch(err){
-    console.log(err);
-  }  
 
 
   return (
@@ -44,14 +45,15 @@ const CompleteReg =  async () => {
                 <h1 className="text-primary mt-5">
                   You have completed your registration <span className="fw-bolder">SUCCESSFULLY!</span>
                 </h1>
+                  <Button variant="outline-primary" onClick= {() => activate()}>Activate Your account</Button>
                 <p className="lead my-4">
-                  You will be redirected in 3 seconds. If you have not been redirected to the login page click the button below.
+                  You will be redirected in 3 seconds. If you have not been redirected to the login page click to register your business.
             </p>
-                <Button as={Link}
+                {/* <Button
                 variant="primary" className="animate-hover" to={Routs.Signin.path}>
                   <FontAwesomeIcon icon={faGraduationCap} className="animate-left-3 me-3 ms-2" />
-                  Go back home
-                </Button>
+                  Login
+                </Button> */}
               </div>
             </Col>
           </Row>

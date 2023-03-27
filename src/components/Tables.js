@@ -243,9 +243,9 @@ export const TransactionsTable = () => {
               <Dropdown.Item>
                 <FontAwesomeIcon icon={faEye} className="me-2" /> View Details
               </Dropdown.Item>
-              <Dropdown.Item>
+              {/* <Dropdown.Item>
                 <FontAwesomeIcon icon={faEdit} className="me-2" /> Edit
-              </Dropdown.Item>
+              </Dropdown.Item> */}
               <Dropdown.Item className="text-danger">
                 <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Remove
               </Dropdown.Item>

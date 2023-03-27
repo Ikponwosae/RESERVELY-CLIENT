@@ -77,6 +77,15 @@ const reducer = (state, action) => {
                 user,
             }
         }
+        case 'REGISTER BUSINESS': {
+            const { business } = action.payload
+            console.log(business)
+            return {
+                ...state,
+                isAuthenticated: true,
+                business,
+            }
+        }
         default: {
             return { ...state }
         }
@@ -90,6 +99,7 @@ const AuthContext = createContext({
     logout: () => { },
     register: () => Promise.resolve(),
     completeRegistration: () => Promise.resolve(),
+    registerBusiness: () => Promise.resolve(),
 })
 
 export const AuthProvider = ({ children }) => {
@@ -110,6 +120,7 @@ export const AuthProvider = ({ children }) => {
                 user,
             },
         })
+        return user
     }
 
     const register = async (firstName, lastName,email, phoneNumber, password, address, role) => {
@@ -138,7 +149,6 @@ export const AuthProvider = ({ children }) => {
     const completeRegistration = async (token) => {
         const response =  await axios.get(`${baseUrl}/auth/verification/${token}`)
         const user = response.data
-        console.log(user)
         dispatch({
             type: 'COMPLETE REGISTRATION',
             payload: {
@@ -146,6 +156,17 @@ export const AuthProvider = ({ children }) => {
             }
         })
         return user
+    }
+    
+    const registerBusiness = async (userId) =>{
+        const response = await axios.get(`${baseUrl}/auth/register/business/${userId}`)
+        const business = response.data
+        dispatch({
+            type: 'REGISTER BUSINESS',
+            payload: {
+                business: business
+            }
+        })
     }
 
     const logout = () => {
@@ -206,6 +227,7 @@ export const AuthProvider = ({ children }) => {
                 logout,
                 register,
                 completeRegistration,
+                registerBusiness,
             }}
         >
             {children}
