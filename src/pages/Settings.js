@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxOpen, faCartArrowDown, faChartPie, faChevronDown, faClipboard, faCommentDots, faFileAlt, faPlus, faRocket, faStore } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Button, Dropdown } from '@themesberg/react-bootstrap';
 import { ChoosePhotoWidget, ProfileCardWidget } from "../components/Widgets";
-import { OwnerInfoForm } from "../components/Forms";
+import { OwnerInfoForm } from "pages/components/Formss";
 import Sidebar from "components/Sidebar";
 import AnimationRevealPage from "helpers/AnimationRevealPage";
 import Footer from "components/Footer";

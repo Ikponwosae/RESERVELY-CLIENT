@@ -12,7 +12,7 @@ const MyCalendar = (props) => (
     //   events={myEventsList}
       startAccessor="start"
       endAccessor="end"
-      style={{ height: 500, width: 700 }}
+      style={{ height: 500, width: 1200, paddingLeft: 90 }}
     />
   </div>
 )
