@@ -133,6 +133,11 @@ export default function App() {
             <Route path="/book" element={<BookAppointment />} />
             <Route path="/user/dashboard" element={<Dashboard />} />
             <Route path="/components/tabs" element={<Tabs />} />
+             
+
+            <Route path="/book" element={<BookAppointment />} />
+            <Route path="/user/dashboard" element={<Dashboard />} />
+            <Route path="/components/tabs" element={<Tabs />} />
 
             {/* home pages */}
             <Route path="/" element={<HotelTravelLandingPage />} />

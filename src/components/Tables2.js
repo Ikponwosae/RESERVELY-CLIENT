@@ -6,7 +6,7 @@ import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagin
 import { Link } from 'react-router-dom';
 
 import { Routs } from "../routs";
-import{ StaffName, ServiceBooked, BookedDate, StartDate, EndDate, price } from "../data/tables";
+import { StaffName, ServiceBooked, BookedDate, StartDate, EndDate, price, status } from "../data/tables";
 import transactions from "../data/appointments";
 import commands from "../data/commands";
 
@@ -68,9 +68,9 @@ export const PageVisitsTable = () => {
             <th scope="col">Rates</th>
           </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
           {staffs.map(pv => <TableRow key={`staffs-${pv.id}`} {...pv} />)}
-        </tbody>
+        </tbody> */}
       </Table>
     </Card>
   );
@@ -125,7 +125,7 @@ export const PageTrafficTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)}
+            {/* {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)} */}
           </tbody>
         </Table>
       </Card.Body>
@@ -183,7 +183,7 @@ export const RankingTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)}
+            {/* {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)} */}
           </tbody>
         </Table>
       </Card.Body>
@@ -203,9 +203,14 @@ export const TransactionsTable = () => {
     return (
       <tr>
         <td>
-          <Card.Link as={Link} to={Routs.Invoice.path} className="fw-normal">
+          {/* <Card.Link as={Link} to={Routs.Invoice.path} className="fw-normal">
+            {invoiceNumber}
+          </Card.Link> */}
+        </td>
+        <td>
+          <span className="fw-normal">
             {StaffName}
-          </Card.Link>
+          </span>
         </td>
         <td>
           <span className="fw-normal">
@@ -237,6 +242,8 @@ export const TransactionsTable = () => {
             {status}
           </span>
         </td>
+        
+        
         <td>
           <Dropdown as={ButtonGroup}>
             <Dropdown.Toggle as={Button} split variant="link" className="text-dark m-0 p-0">
@@ -267,12 +274,13 @@ export const TransactionsTable = () => {
         <Table hover className="user-table align-items-center">
           <thead>
             <tr>
-              <th className="border-bottom">#</th>
-              <th className="border-bottom">Bill For</th>
-              <th className="border-bottom">Issue Date</th>
-              <th className="border-bottom">Due Date</th>
-              <th className="border-bottom">Total</th>
+              <th className="border-bottom">Staff Name</th>
+              <th className="border-bottom">Service Booked</th>
+              <th className="border-bottom">Booked Date</th>
+              <th className="border-bottom">Start Date</th>
+              <th className="border-bottom">End Date</th>
               <th className="border-bottom">Status</th>
+              <th className="border-bottom">Price</th>
               <th className="border-bottom">Action</th>
             </tr>
           </thead>
@@ -282,19 +290,7 @@ export const TransactionsTable = () => {
         </Table>
         <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
           <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
+            {/* s */}
           </Nav>
           <small className="fw-bold">
             Showing <b>{totalTransactions}</b> out of <b>25</b> entries
