@@ -63,8 +63,16 @@ import AddService from "./pages/shopOwner/addService"
 import EditService from "pages/shopOwner/editService"
 import Waitlist from "./pages/shopOwner/waitlist"
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "contexts/JWTAuthContext";
+//USER
+import BookAppointment from "pages/user/BookAppointment";
+import Dashboard from "pages/user/Dashboard";
+
+//Role based authorization
+import AuthGuard from "auth/AuthGuard";
+import { authRoles } from "auth/authRoles";
+
+import {  Routes, Route } from "react-router-dom";
+// import { AuthProvider } from "contexts/JWTAuthContext";
 
 
 
@@ -78,42 +86,53 @@ export default function App() {
       <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/components/:type/:subtype/:name" element={<ComponentRenderer />} />
-          <Route path="/components/:type/:name" element={<ComponentRenderer />} />
-          {/* auth */}
-          <Route path="/about" element={<AboutUsPage />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/register-business/:id" element={<RegisterBusiness />} />
-          <Route path="/send-verify" element={<EmailSent />} />
-          <Route path="/complete-registration/:token"  element={<CompleteRegistration />} />
-          {/* dashboards */}
-          <Route path="/dashboard-overview" element={<DashboardOverview />} />
-          <Route path="/shop-owner/dashboard" element={<DashboardOverview />} />
-          {/* components  */}
-          <Route path="/accordions" element={<Accordion />} />
-          <Route path="/components/buttons" element={<Buttons />} />
-          <Route path="/components/forms" element={<Forms />} />
-          <Route path="/components/tables" element={<Tables />} />
-          <Route path="/components/modals" element={<Modals />} />
-          <Route path="/components/badges" element={<Badges />} />
-          <Route path="/components/toasts" element={<Toasts />} />
-          <Route path="/components/popovers" element={<Popovers />} />
-          <Route path="/tables/bootstrap-tables" element={<BootstrapTables />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/components/alerts" element={<Alerts />} />
-          <Route path="/components/tooltips" element={<Tooltips />} />
-          <Route path="/components/tabs" element={<Tabs />} />
+            
+            {/* <Route path="/components/:type/:subtype/:name" element={<ComponentRenderer />} />
+            <Route path="/components/:type/:name" element={<ComponentRenderer />} /> */}
+            {/* auth */}
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/calendar" element={<MyCalendar />} />
+            
+            <Route path="/send-verify" element={<EmailSent />} />
+            <Route path="/complete-registration/:token"  element={<CompleteRegistration />} />
+            <Route path="/dashboard-overview" element={<DashboardOverview />} />
+            <Route path="/components/forms" element={<Forms />} />
 
-          {/*SHOP-OWNER */}
-          <Route path="shop-owner/staff" element={<Staff />} />
-          <Route path="shop-owner/invite-staff" element={<InviteStaff />} />
-          <Route path="shop-owner/services" element={<Service />} />
-          <Route path="shop-owner/add-service" element={<AddService />} />
-          <Route path="shop-owner/edit-service" element={<EditService />} />
-          <Route path="shop-owner/waitlist" element={<Waitlist />} />
+            {/* protect these routes --only logged in users */}
+            <Route element={<AuthGuard role={authRoles.SHOPOWNER} />}>
+              <Route path="/register-business/:id" element={<RegisterBusiness />} />
+              <Route path="/shop-owner/dashboard" element={<DashboardOverview />} />
+              {/* components  */}
+              <Route path="/accordions" element={<Accordion />} />
+              <Route path="/components/buttons" element={<Buttons />} />
+              
+              <Route path="/components/tables" element={<Tables />} />
+              <Route path="/components/modals" element={<Modals />} />
+              <Route path="/components/badges" element={<Badges />} />
+              <Route path="/components/toasts" element={<Toasts />} />
+              <Route path="/components/popovers" element={<Popovers />} />
+              <Route path="/tables/bootstrap-tables" element={<BootstrapTables />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/components/alerts" element={<Alerts />} />
+              <Route path="/components/tooltips" element={<Tooltips />} />
+              
+
+              {/*SHOP-OWNER */}
+              <Route path="shop-owner/staff" element={<Staff />} />
+              <Route path="shop-owner/invite-staff" element={<InviteStaff />} />
+              <Route path="shop-owner/services" element={<Service />} />
+              <Route path="shop-owner/add-service" element={<AddService />} />
+              <Route path="shop-owner/edit-service" element={<EditService />} />
+              <Route path="shop-owner/waitlist" element={<Waitlist />} />
+            </Route>
+
+            <Route path="/book" element={<BookAppointment />} />
+            <Route path="/user/dashboard" element={<Dashboard />} />
+            <Route path="/components/tabs" element={<Tabs />} />
 
           {/* home pages */}
           <Route path="/thank-you" element={<ThankYouPage />} />
