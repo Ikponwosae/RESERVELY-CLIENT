@@ -6,7 +6,7 @@ import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagin
 import { Link } from 'react-router-dom';
 
 import { Routs } from "../routs";
-import{ StaffName, ServiceBooked, BookedDate, StartDate, EndDate, price } from "../data/tables";
+// import{ Staffs, pageRanking, pageTraffic} from "../data/tables";
 import transactions from "../data/appointments";
 import commands from "../data/commands";
 
@@ -69,7 +69,7 @@ export const PageVisitsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {staffs.map(pv => <TableRow key={`staffs-${pv.id}`} {...pv} />)}
+          {/* {staffs.map(pv => <TableRow key={`staffs-${pv.id}`} {...pv} />)} */}
         </tbody>
       </Table>
     </Card>
@@ -125,7 +125,7 @@ export const PageTrafficTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)}
+            {/* {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)} */}
           </tbody>
         </Table>
       </Card.Body>
@@ -183,7 +183,7 @@ export const RankingTable = () => {
             </tr>
           </thead>
           <tbody>
-            {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)}
+            {/* {pageRanking.map(r => <TableRow key={`ranking-${r.id}`} {...r} />)} */}
           </tbody>
         </Table>
       </Card.Body>

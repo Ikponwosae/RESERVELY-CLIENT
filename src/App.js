@@ -35,6 +35,7 @@ import EmailSent from "pages/auths/EmailSent";
 import NotFound from "pages/auths/NotFound";
 import CompleteRegistration from "pages/auths/verifyAcc";
 import AboutUsPage from "pages/mainPages/AboutUs.js";
+import ContactUsPage from "pages/mainPages/ContactUs.js";
 import Pricing from "pages/mainPages/Pricing";
 import Settings from "pages/Settings";
 import RegisterBusiness from "pages/auths/RegisterBusiness";
@@ -65,6 +66,10 @@ import AddService from "./pages/shopOwner/addService"
 import EditService from "pages/shopOwner/editService"
 import Waitlist from "./pages/shopOwner/waitlist"
 
+//STAFF
+import BookAppointments from "pages/Staffs/BookAppointments";
+import Dashboards from "pages/Staffs/Dashboards";
+
 //USER
 import BookAppointment from "pages/user/BookAppointment";
 import Dashboard from "pages/user/Dashboard";
@@ -91,6 +96,7 @@ export default function App() {
             <Route path="/components/:type/:name" element={<ComponentRenderer />} /> */}
             {/* auth */}
             <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/contact" element={<ContactUsPage />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
@@ -135,8 +141,8 @@ export default function App() {
             <Route path="/components/tabs" element={<Tabs />} />
              
 
-            <Route path="/book" element={<BookAppointment />} />
-            <Route path="/user/dashboard" element={<Dashboard />} />
+            <Route path="/books" element={<BookAppointments />} />
+            <Route path="/Staffs/Dashboards" element={<Dashboards />} />
             <Route path="/components/tabs" element={<Tabs />} />
 
             {/* home pages */}
