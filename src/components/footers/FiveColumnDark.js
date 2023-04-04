@@ -84,7 +84,7 @@ export default () => {
               </LinkListItem>
             </LinkList>
           </Column>
-          <Column>
+          {/* <Column>
             <ColumnHeading>Product</ColumnHeading>
             <LinkList>
               <LinkListItem>
@@ -100,8 +100,8 @@ export default () => {
                 <Link href="#">Team</Link>
               </LinkListItem>
             </LinkList>
-          </Column>
-          <Column>
+          </Column> */}
+          {/* <Column>
             <ColumnHeading>Legal</ColumnHeading>
             <LinkList>
               <LinkListItem>
@@ -117,12 +117,12 @@ export default () => {
                 <Link href="#">Disclaimer</Link>
               </LinkListItem>
             </LinkList>
-          </Column>
+          </Column> */}
           <Column>
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                +234 (809) (768)-864-88
+                +2348057071202
               </LinkListItem>
               <LinkListItem>
                 <Link href="mailto:support@servana.com">support@Reservely.com</Link>

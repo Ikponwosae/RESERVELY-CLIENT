@@ -45,8 +45,8 @@ export default ({
   navLinks = [
     <NavLinks key={1}>
       <NavLink href="/about">About</NavLink>
-      <NavLink href="blog">Blog</NavLink>
-      <NavLink href="pricing">Pricing</NavLink>
+      {/* <NavLink href="blog">Blog</NavLink> */}
+      <NavLink href="pricing">Contact Us</NavLink>
       <NavLink href="login">Login</NavLink>
     </NavLinks>
   ],

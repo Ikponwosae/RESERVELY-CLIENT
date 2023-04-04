@@ -8,8 +8,8 @@ import TrendingCard from "components/cards/TwoTrendingPreviewCardsWithImage.js";
 import Blog from "components/blogs/PopularAndRecentBlogPosts.js";
 import Testimonial from "components/testimonials/ThreeColumnWithProfileImage.js";
 import FAQ from "components/faqs/SimpleWithSideImage.js";
-import SubscribeNewsLetterForm from "components/forms/SimpleSubscribeNewsletter.js";
-import Footer from "components/footers/FiveColumnDark.js";
+//import SubscribeNewsLetterForm from "components/forms/SimpleSubscribeNewsletter.js";
+import Footer from "components/footers/MiniCenteredFooter.js";
 
 export default () => (
   <AnimationRevealPage>
@@ -21,7 +21,7 @@ export default () => (
     {/* <Blog /> */}
     <Testimonial textOnLeft={true}/>
     <FAQ />
-    <SubscribeNewsLetterForm />
+    {/* <SubscribeNewsLetterForm /> */}
     <Footer />
   </AnimationRevealPage>
 );

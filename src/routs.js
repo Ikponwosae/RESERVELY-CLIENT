@@ -3,6 +3,7 @@ export const Routs = {
     // pages
     Presentation: { path: "/" },
     Pricing: { path: "/pricing"},
+    ContactUsPage: { path: "/contact"},
     HomePage: { path: "/"},
     DashboardOverview: { path: "/dashboard-overview" },
     Transactions: { path: "/transactions" },
@@ -33,7 +34,7 @@ export const Routs = {
     WaitList: { path: "/shop-owner/waitlist"},
 
     //STAFF
-    StaffDashboard: { path : "staff/dashboard"},
+    StaffDashboard: { path : "Staffs/Dashboards"},
 
     //USER
     UserDashboard: { path : "user/dashboard"},
