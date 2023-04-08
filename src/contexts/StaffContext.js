@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer } from 'react'
 import axios from 'axios'
 
-const baseUrl ="http://localhost:4000/api/v1"
+export const baseUrl ="http://localhost:4000/api/v1"
 
 const token = localStorage.getItem('token')
 
@@ -40,9 +40,10 @@ const StaffContext = createContext({
 
 export const StaffProvider = ({children }) => {
     const [state, dispatch] = useReducer(reducer, [])
-
+    console.log("stuffff")
     const getStaff = async () => {
         try {
+            console.log("i came here")
             const response = await axios.get(`${baseUrl}/owner/dashboard`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
