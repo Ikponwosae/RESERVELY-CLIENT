@@ -142,7 +142,7 @@ export default function App() {
              
 
             <Route path="/books" element={<BookAppointments />} />
-            <Route path="/Staffs/Dashboards" element={<Dashboards />} />
+            <Route path="/staff/dashboard" element={<Dashboards />} />
             <Route path="/components/tabs" element={<Tabs />} />
 
             {/* home pages */}
