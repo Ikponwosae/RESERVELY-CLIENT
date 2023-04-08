@@ -3,7 +3,6 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faCashRegister, faCloudUploadAlt, faPlus, faTasks, } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Button, Dropdown, Card } from '@themesberg/react-bootstrap';
-
 import { CounterWidget, CircleChartWidget, BarChartWidget } from "../../components/Widgets";
 import { PageVisitsTable } from "../../components/Tables";
 import { trafficShares, totalOrders } from "../../data/charts";

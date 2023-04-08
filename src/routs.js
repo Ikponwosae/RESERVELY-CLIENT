@@ -1,4 +1,3 @@
-
 export const Routs = {
     // pages
     Presentation: { path: "/" },
@@ -30,7 +29,7 @@ export const Routs = {
     InviteStaff : { path: "/shop-owner/invite-staff"},
     Services : {path: "/shop-owner/services"},
     AddService: { path: "/shop-owner/add-service"},
-    EditService: { path: "/shop-owner/edit-service"},
+    EditService: { path: "/shop-owner/services/edit/:id"},
     WaitList: { path: "/shop-owner/waitlist"},
 
     //STAFF

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Breadcrumb, Button, ButtonGroup, Row, Col, InputGroup, Form, Dropdown, Modal, Card, Table } from "@themesberg/react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Breadcrumb, Button, Modal, Card, Table } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faTools, faCog, faCheck, faSearch, faSlidersH, faPause } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faTools } from '@fortawesome/free-solid-svg-icons';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import Sidebar from "components/Sidebar";
 import ScrollToTop from "components/ScrollToTop";
@@ -9,15 +9,41 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import { Link } from 'react-router-dom';
 import { Routs } from "routs";
-import services from "../../data/services"
+import axios from "axios";
+import { baseUrl } from "./staff";
+import jwtDecode from "jwt-decode";
+import format from "date-fns/format";
 
 
-// import Thomas from "../assets/img/team/thomas.jpg"
+const token = localStorage.getItem('token')
+const decodedToken = jwtDecode(token)
+const business = decodedToken.business
 
-export default () => {
+const GetServices =  () => {
+    const [services, setServices] = useState([])
+
+    useEffect(() => {
+        const getService = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/business/${business}/services`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    } 
+                })
+    
+                const {services} = response.data
+                setServices(services)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        getService()
+
+    }, [])
+
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
-    return (
+    return ( 
         <>
         <Sidebar />
         <AnimationRevealPage >
@@ -41,15 +67,15 @@ export default () => {
                 </Button>
             </Card.Link>
             
-            <ButtonGroup className="ms-3">
+            {/* <ButtonGroup className="ms-3">
                 <Button variant="outline-tertiary" size="sm">Share</Button>
                 <Button variant="outline-warning" size="sm">Export</Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
             </div>
             </div>
 
-            <div className="table-settings mb-4">
-    <Row className="justify-content-between align-items-center">
+            {/* <div className="table-settings mb-4">
+            <Row className="justify-content-between align-items-center">
         <Col xs={9} lg={4} className="d-flex">
             <InputGroup className="me-2 me-lg-3">
                 <InputGroup.Text>
@@ -97,7 +123,7 @@ export default () => {
             </Dropdown>
         </Col>
     </Row>
-</div>
+</div> */}
 
             <Card border="light" className="table-wrapper table-responsive shadow-sm">
                 <Card.Body>
@@ -108,10 +134,12 @@ export default () => {
                                 <th className="border-bottom">Duration</th>
                                 <th className="border-bottom">Price</th>
                                 <th className="border-bottom">Description</th>
+                                <th className="border-bottom">Date Created</th>
+                                <th className="border-bottom">Date Edited</th>
                                 <th className="border-bottom">  </th>
                             </tr>
                             {services.map(s => (
-                            <tr key={s.key}>
+                            <tr key={s._id}>
                                 <td>
                                     <Card.Link className="d-flex align-items-center">
                                         <div className="d-block">
@@ -119,12 +147,14 @@ export default () => {
                                         </div>
                                     </Card.Link>
                                 </td>
-                                <td><span className="fw-bold">${s.duration}</span></td>
-                                <td><span className="fw-normal">{s.price}</span></td>
-                                <td><span className="fw-normal">{s.description}</span></td>
+                                <td><span className="fw-bold">{s.duration} mins</span></td>
+                                <td><span className="fw-normal">${s.price}</span></td>
+                                <td style={{wordBreak: "break-word", whiteSpace: "unset"}}><span className="fw-normal">{s.description}</span></td>
+                                <td><span className="fw-normal">{format(new Date(s.createdAt), 'do-MMM-yyyy')}</span></td>
+                                <td><span className="fw-normal">{format(new Date(s.updatedAt), 'do-MMM-yyyy')}</span></td>
                                 <td>
-                                <Card.Link as={Link} to={Routs.EditService.path} className="fw-bold">
-                                    <Button bsPrefix="text" href="#info" variant="info" className="m-3">EDIT</Button>
+                                <Card.Link as={Link} to={`edit/${s._id}`} className="fw-bold">
+                                    <Button bsPrefix="text" variant="info" className="m-3">EDIT</Button>
                                 </Card.Link>
                                  | 
                                  <Button bsPrefix="text" href="#info" variant="danger" className="m-3" onClick={() => setShowDefault(true)}>DELETE </Button>
@@ -161,3 +191,5 @@ export default () => {
         </>
     );
 };
+
+export default GetServices;

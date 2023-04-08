@@ -2,12 +2,12 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette, faLaptopCode, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Nav, Tab } from '@themesberg/react-bootstrap';
-
 import { TransactionsTable } from "../../components/Tables";
 import { PageVisitsTable } from "../../components/Tables";
 import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
 import MyCalendar from "components/Calendar";
+import Settings from "pages/Settings";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import { OwnerInfoForm } from "pages/components/Formss";
 import { Link } from 'react-router-dom';

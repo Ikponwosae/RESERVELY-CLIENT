@@ -10,7 +10,8 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter";
 import Header, { LogoLink, NavLinks, NavLink as NavLinkBase } from "./../../components/headers/light";
-
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const StyledHeader = styled(Header)`
   ${tw`justify-between`}
@@ -21,6 +22,13 @@ const StyledHeader = styled(Header)`
 const NavLink = tw(NavLinkBase)`
   sm:text-sm sm:mx-6
 `;
+const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
+const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
+const TextColumn = styled(Column)(props => [
+  tw`md:w-7/12 mt-16 md:mt-0`,
+  props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`
+]);
+const localizer = momentLocalizer(moment)
 
 export default ({navLinks = [
         <NavLinks key={1}>
@@ -32,21 +40,32 @@ export default ({navLinks = [
       ]}) => {
     
     const [bookDate, setBookDate] = useState("");
+    const [date, setDate] = useState(new Date());
+    const myEventsList = [
+      {
+        start: moment().toDate(),
+        end: moment()
+          .add(1, "hours")
+          .toDate(),
+        title: "Wash Hair"
+      }
+    ]
 
     return (
         <>
         <StyledHeader links={navLinks} collapseBreakpointClass="sm" />
         <main>
         <AnimationRevealPage>
-        <section className=" my-5 mt-lg-6 mb-lg-5">
-        <Container>
-            <div>
+        {/* <section className=" my-5 mt-lg-6 mb-lg-5"> */}
+        {/* <Container> */}
+          <TwoColumn css={tw`md:items-center`}>
+            <TextColumn >
+            <div className="d-flex justify-content-center align-items-center mt-4">
                 <span>Business name</span>
             </div>
-          {/* <Row className="justify-content-center form-bg-image"> */}
                 <Formik>
                 <Form >
-                <Row className="justify-content-md-center">
+                {/* <Row className="justify-content-md-center"> */}
                 <Form.Group className="mb-3">
                     <Form.Label>Service</Form.Label>
                     <Form.Select>
@@ -57,9 +76,10 @@ export default ({navLinks = [
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Select your preferred appointment Date</Form.Label>
+                    <Form.Label>Select your preferred Appointment Date and Time</Form.Label>
+                    <span>  ** Please make sure to look through the Available times on the calendar</span>
                     <Datetime
-                    timeFormat={false}
+                    timeFormat={true}
                     closeOnSelect={false}
                     onChange={setBookDate}
                     renderInput={(props, openCalendar) => (
@@ -75,7 +95,7 @@ export default ({navLinks = [
                         </InputGroup>
                     )} />
                 </Form.Group>
-                <Form.Group className="mb-3">
+                {/* <Form.Group className="mb-3">
                     <Form.Label>Available Times</Form.Label>
                     <Form.Select>
                     <option defaultValue>Available Times</option>
@@ -83,19 +103,45 @@ export default ({navLinks = [
                     <option>11:00</option>
                     <option>12:30</option>
                     </Form.Select>
-                </Form.Group>
-                </Row>
+                </Form.Group> */}
+                {/* </Row> */}
                                 
-                <Row className="justify-content-md-center mb-3">
+                {/* <Row className="justify-content-md-center mb-3"> */}
                     <Button variant="outline-primary" size="lg" className="me-1">BOOK NOW</Button>
-                </Row>
+                {/* </Row> */}
                 </Form>
                 </Formik>
+                <div className="d-flex justify-content-center align-items-center mt-4">
+                <p className='text-center'>
+                  <span className='bold'>Selected Date:</span>{' '}
+                  {date.toDateString()}
+                </p>
+                </div>
+            </TextColumn>
+            <div>
+              <span className="d-flex justify-content-center align-items-center mt-4">BUSINESS SCHEDULE</span> <br/>
+              <Calendar
+                onChange={setDate} 
+                value={date}
+                localizer={localizer}
+                defaultView="month"
+                events={myEventsList}
+                startAccessor="start"
+                endAccessor="end"
+                style={
+                  { 
+                    height: 400, 
+                    width: 700,
+                    
+                  }
+                }
+              />
+            </div>
+          </TwoColumn>
 
                 
-          {/* </Row> */}
-        </Container>
-      </section>
+        {/* </Container> */}
+      {/* </section> */}
       <MiniCenteredFooter/>
       </AnimationRevealPage>
     </main> 

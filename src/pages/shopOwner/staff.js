@@ -1,24 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb, Button, ButtonGroup, Row, Col, InputGroup, Form, Dropdown, Modal, Card, Table } from "@themesberg/react-bootstrap";
+import { Breadcrumb, Button, Modal, Card, Table } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPlus, faCog, faCheck, faSearch, faSlidersH, faPause } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus, faPause } from '@fortawesome/free-solid-svg-icons';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
+import { Routs } from "routs";
+import { Link } from 'react-router-dom';
 import Sidebar from "components/Sidebar";
 import ScrollToTop from "components/ScrollToTop";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
-import useStaff from "hooks/useStaff";
+import { format  } from "date-fns";
+import axios from 'axios'
+
+export const baseUrl ="http://localhost:4000/api/v1"
+
+const token = localStorage.getItem('token')
 
 
 const GetStaff = () => {
     const [staffs, setStaffs] = useState([])
-    const { getStaff } = useStaff
-    
-    useEffect(() => {
-        getStaff()
-        setStaffs(staffs)
 
-    }, [getStaff, staffs])
+    useEffect(() => {
+        const getStaff = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/owner/dashboard`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    } 
+                })
+    
+                const {staff} = response.data
+                setStaffs(staff)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        getStaff()
+
+    }, [])
 
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
@@ -43,14 +62,10 @@ const GetStaff = () => {
             <Button variant="outline-primary" size="sm">
                 <FontAwesomeIcon icon={faPlus} className="me-2" /> Invite Staff
             </Button>
-            <ButtonGroup className="ms-3">
-                <Button variant="outline-primary" size="sm">Share</Button>
-                <Button variant="outline-primary" size="sm">Export</Button>
-            </ButtonGroup>
             </div>
             </div>
 
-            <div className="table-settings mb-4">
+            {/* <div className="table-settings mb-4">
     <Row className="justify-content-between align-items-center">
         <Col xs={9} lg={4} className="d-flex">
             <InputGroup className="me-2 me-lg-3">
@@ -99,7 +114,7 @@ const GetStaff = () => {
             </Dropdown>
         </Col>
     </Row>
-</div>
+</div> */}
 
             <Card border="light" className="table-wrapper table-responsive shadow-sm">
                 <Card.Body>
@@ -116,7 +131,7 @@ const GetStaff = () => {
                             {staffs.map(s => (
                             <tr key={s._id}>
                                 <td>
-                                    <Card.Link className="d-flex align-items-center">
+                                    <Card.Link as={Link} to={Routs.Lock.path} className="d-flex align-items-center">
                                         <div className="d-block">
                                             <span className="fw-bold">{s.firstName}</span>
                                         </div>
@@ -125,7 +140,7 @@ const GetStaff = () => {
                                 <td><span className="fw-bold">{s.lastName}</span></td>
                                 <td><span className="fw-normal"><div className="small text-gray">{s.email}</div></span></td>
                                 <td><span className="fw-normal"><div className="small text-gray">{s.status}</div></span></td>
-                                <td><span className="fw-normal">{s.createdAt}</span></td>
+                                <td><span className="fw-normal">{format(new Date(s.createdAt), 'do-MMM-yyyy')}</span></td>
                                 <td>
                                 <Button variant="warning" size="xs" className="text-dark" onClick={() => setShowDefault(true)}>
                                     <FontAwesomeIcon icon={faPause} className="me-2" /> SUSPEND
@@ -136,7 +151,7 @@ const GetStaff = () => {
                                     <Button variant="close" aria-label="Close" onClick={handleClose} />
                                     </Modal.Header>
                                     <Modal.Body>
-                                    <p>You are about to suspend this user. Pending this suspension, they will not be able to login to the dashboard and you will not be able to assign them to appointments</p>
+                                    <p>You are about to suspend this user. Pending their suspension, they will not be able to login to the dashboard and you will not be able to assign them to appointments</p>
                                     </Modal.Body>
                                     <Modal.Footer>
                                     <Button variant="secondary" onClick={handleClose}>

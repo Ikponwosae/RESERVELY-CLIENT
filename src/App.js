@@ -108,9 +108,9 @@ export default function App() {
             <Route path="/dashboard-overview" element={<DashboardOverview />} />
             <Route path="/components/forms" element={<Forms />} />
 
+              <Route path="/register-business/:id" element={<RegisterBusiness />} />
             {/* protect these routes --only logged in users */}
             <Route element={<AuthGuard role={authRoles.SHOPOWNER} />}>
-              <Route path="/register-business/:id" element={<RegisterBusiness />} />
               <Route path="/shop-owner/dashboard" element={<DashboardOverview />} />
               {/* components  */}
               <Route path="/accordions" element={<Accordion />} />
@@ -132,7 +132,7 @@ export default function App() {
               <Route path="shop-owner/invite-staff" element={<InviteStaff />} />
               <Route path="shop-owner/services" element={<Service />} />
               <Route path="shop-owner/add-service" element={<AddService />} />
-              <Route path="shop-owner/edit-service" element={<EditService />} />
+              <Route path="shop-owner/services/edit/:id" element={<EditService />} />
               <Route path="shop-owner/waitlist" element={<Waitlist />} />
             </Route>
 
