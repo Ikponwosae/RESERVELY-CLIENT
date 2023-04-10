@@ -1,5 +1,6 @@
 {
-  "name": "treact",
+  "homepage": ".",
+  "name": "reservely",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
