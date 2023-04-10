@@ -65,6 +65,7 @@ import Service from "./pages/shopOwner/service"
 import AddService from "./pages/shopOwner/addService"
 import EditService from "pages/shopOwner/editService"
 import Waitlist from "./pages/shopOwner/waitlist"
+import OwnerDashboard from "pages/shopOwner/OwnerDashboard";
 
 //STAFF
 import BookAppointments from "pages/Staffs/BookAppointments";
@@ -111,7 +112,7 @@ export default function App() {
               <Route path="/register-business/:id" element={<RegisterBusiness />} />
             {/* protect these routes --only logged in users */}
             <Route element={<AuthGuard role={authRoles.SHOPOWNER} />}>
-              <Route path="/shop-owner/dashboard" element={<DashboardOverview />} />
+              <Route path="/shop-owner/dashboard" element={<OwnerDashboard />} />
               {/* components  */}
               <Route path="/accordions" element={<Accordion />} />
               <Route path="/components/buttons" element={<Buttons />} />

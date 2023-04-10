@@ -1,16 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Breadcrumb, Button, ButtonGroup, Row, Col, Dropdown, Modal, Card, Table, Form } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCog, faCheck, faSlidersH } from '@fortawesome/free-solid-svg-icons';
-import appointments from '../../data/appointments';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import Sidebar from "components/Sidebar";
 import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
+import axios from "axios";
+import { baseUrl } from "./staff";
+import jwtDecode from "jwt-decode";
+import format from "date-fns/format";
 
 
+const token = localStorage.getItem('token')
+const decodedToken = jwtDecode(token)
 
-export default () => {
+
+const GetWaitlist =  () => {
+    const [waitlist, setWaitlist] = useState([])
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        const waitlist = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/owner/waitlist`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    } 
+                })
+    
+                const {waitlist} = response.data
+                console.log(waitlist)
+                setWaitlist(waitlist)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        waitlist()
+
+    }, [])
+
+    const getUser = async(userId) => {
+        try {
+            const response = await axios.get(`${baseUrl}/auth/user/${userId}`)
+            const { user } = response.data
+            console.log(user)
+            return user;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
     return (
@@ -18,7 +59,6 @@ export default () => {
         <Sidebar />
         <AnimationRevealPage >
         <main className="content">
-          {/* <Navbar /> */}
           <ScrollToTop />
           <div className="d-lg-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
             <div className="mb-4 mb-lg-0">
@@ -80,23 +120,24 @@ export default () => {
                                 <th className="border-bottom">Service</th>
                                 <th className="border-bottom">Start Time</th>
                                 <th className="border-bottom">End Time</th>
+                                <th className="border-bottom">Assigned Staff</th>
                                 <th className="border-bottom">Action</th>
                             </tr>
-                            {appointments.map(a => (
-                            <tr key={a.key}>
+                            {waitlist.map(w => (
+                            <tr key={w._id}>
                                 <td>
                                     <Card.Link className="d-flex align-items-center">
-                                        {/* <Image src={u.image} className="user-avatar rounded-circle me-3" /> */}
                                         <div className="d-block">
-                                            <span className="fw-bold">{a.name}</span>
+                                            <span className="fw-bold">{w.users[0]}</span>
                                         </div>
                                     </Card.Link>
                                 </td>
-                                <td><span className="fw-bold">{a.email}</span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{a.dateBooked}</div></span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{a.Service}</div></span></td>
-                                <td><span className="fw-normal">{a.start}</span></td>
-                                <td><span className="fw-normal">{a.end}</span></td>
+                                <td><span className="fw-bold">{w.email}</span></td>
+                                <td><span className="fw-normal"><div className="small text-gray">{format(new Date(w.bookDate), 'do-MMM-yyyy')}</div></span></td>
+                                <td><span className="fw-normal"><div className="small text-gray">{w.service}</div></span></td>
+                                <td><span className="fw-normal">{format(new Date(w.startTime), 'HH:MM')}</span></td>
+                                <td><span className="fw-normal">{format(new Date(w.endTime), 'HH:MM')}</span></td>
+                                <td><span className="fw-normal">{w._id}</span></td>
                                 <td>
                                 <Button bsPrefix="text" href="#info" variant="info" className="m-3" onClick={() => setShowDefault(true)}>ASSIGN</Button>
                                 <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
@@ -143,3 +184,5 @@ export default () => {
         </>
     );
 };
+
+export default GetWaitlist;

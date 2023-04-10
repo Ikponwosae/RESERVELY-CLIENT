@@ -41,6 +41,19 @@ const GetServices =  () => {
 
     }, [])
 
+    const deleteService = async (serviceId) => {
+        try {
+            await axios.delete(`${baseUrl}/owner/service/${serviceId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                } 
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
     return ( 
@@ -157,7 +170,7 @@ const GetServices =  () => {
                                     <Button bsPrefix="text" variant="info" className="m-3">EDIT</Button>
                                 </Card.Link>
                                  | 
-                                 <Button bsPrefix="text" href="#info" variant="danger" className="m-3" onClick={() => setShowDefault(true)}>DELETE </Button>
+                                 <Button bsPrefix="text" href="#info" variant="danger" className="m-3" onClick={() => {setShowDefault(true); }}>DELETE </Button>
                                  <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
                                     <Modal.Header>
                                     <Modal.Title className="h6">Terms to Delete</Modal.Title>
@@ -167,7 +180,7 @@ const GetServices =  () => {
                                     <p>You are about to Delete this service. Your customers would no longer be able to see this as an option for your business.</p>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose}>
+                                    <Button variant="secondary" onClick={() => {handleClose(); deleteService(s._id)} }>
                                         I Understand, Delete
                                     </Button>
                                     <Button variant="link" className="text-gray ms-auto" onClick={handleClose}>

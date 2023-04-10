@@ -39,13 +39,13 @@ export const Routs = {
     UserDashboard: { path : "user/dashboard"},
 
     // docs
-    DocsOverview: { path: "/documentation/overview" },
-    DocsDownload: { path: "/documentation/download" },
-    DocsQuickStart: { path: "/documentation/quick-start" },
-    DocsLicense: { path: "/documentation/license" },
-    DocsFolderStructure: { path: "/documentation/folder-structure" },
-    DocsBuild: { path: "/documentation/build-tools" },
-    DocsChangelog: { path: "/documentation/changelog" },
+    // DocsOverview: { path: "/documentation/overview" },
+    // DocsDownload: { path: "/documentation/download" },
+    // DocsQuickStart: { path: "/documentation/quick-start" },
+    // DocsLicense: { path: "/documentation/license" },
+    // DocsFolderStructure: { path: "/documentation/folder-structure" },
+    // DocsBuild: { path: "/documentation/build-tools" },
+    // DocsChangelog: { path: "/documentation/changelog" },
 
     // components
     Accordions: { path: "/accordions" },

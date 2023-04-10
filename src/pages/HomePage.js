@@ -19,13 +19,13 @@ import NotFoundPage from "./auths/NotFound";
 import ServerError from "./auths/ServerError";
 
 // documentation pages
-import DocsOverview from "./documentation/DocsOverview";
-import DocsDownload from "./documentation/DocsDownload";
-import DocsQuickStart from "./documentation/DocsQuickStart";
-import DocsLicense from "./documentation/DocsLicense";
-import DocsFolderStructure from "./documentation/DocsFolderStructure";
-import DocsBuild from "./documentation/DocsBuild";
-import DocsChangelog from "./documentation/DocsChangelog";
+// import DocsOverview from "./documentation/DocsOverview";
+// import DocsDownload from "./documentation/DocsDownload";
+// import DocsQuickStart from "./documentation/DocsQuickStart";
+// import DocsLicense from "./documentation/DocsLicense";
+// import DocsFolderStructure from "./documentation/DocsFolderStructure";
+// import DocsBuild from "./documentation/DocsBuild";
+// import DocsChangelog from "./documentation/DocsChangelog";
 
 // components
 import Sidebar from "../components/Sidebar";
@@ -137,13 +137,13 @@ export default () => (
     <RouteWithSidebar exact path={Routs.Toasts.path} component={Toasts} />
 
     {/* documentation */}
-    <RouteWithSidebar exact path={Routs.DocsOverview.path} component={DocsOverview} />
+    {/* <RouteWithSidebar exact path={Routs.DocsOverview.path} component={DocsOverview} />
     <RouteWithSidebar exact path={Routs.DocsDownload.path} component={DocsDownload} />
     <RouteWithSidebar exact path={Routs.DocsQuickStart.path} component={DocsQuickStart} />
     <RouteWithSidebar exact path={Routs.DocsLicense.path} component={DocsLicense} />
     <RouteWithSidebar exact path={Routs.DocsFolderStructure.path} component={DocsFolderStructure} />
     <RouteWithSidebar exact path={Routs.DocsBuild.path} component={DocsBuild} />
-    <RouteWithSidebar exact path={Routs.DocsChangelog.path} component={DocsChangelog} />
+    <RouteWithSidebar exact path={Routs.DocsChangelog.path} component={DocsChangelog} /> */}
 
     <Navigate to={Routs.NotFound.path} />
   </Routes>
