@@ -2,6 +2,8 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import { faAccessibleIcon } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Header, { LogoLink, NavLinks, NavLink as NavLinkBase } from "../headers/light.js";
 
@@ -45,24 +47,24 @@ export default ({
   navLinks = [
     <NavLinks key={1}>
       <NavLink href="/about">About</NavLink>
-      {/* <NavLink href="blog">Blog</NavLink> */}
-      <NavLink href="pricing">Contact Us</NavLink>
-      <NavLink href="login">Login</NavLink>
+      <NavLink href="blog">Blog</NavLink>
+      <NavLink href="/pricing">Contact Us</NavLink>
+      <NavLink href="/login">Login</NavLink>
     </NavLinks>
   ],
   heading = (
     <>
-      Services for you
+      Business name
       <wbr />
       <br />
-      <span tw="text-primary-500" className="text-colour">anywhere you are.</span>
+      {/* <span tw="text-primary-500" className="text-colour">anywhere you are.</span> */}
     </>
   ),
-  description = "We've bring businesses in the service industry across the world to you. As a businesss, we present you to potential clients. A seamless, all in one application for your business needs",
-  primaryActionUrl = "/signup",
-  primaryActionText = "Sign Up",
+  description = "We bring businesses in the service industry across the world to you. As a businesss, we present you to potential clients. A seamless, all in one application for your business needs",
+  primaryActionUrl = "/book",
+  primaryActionText = "Book now",
   secondaryActionUrl = "#",
-  secondaryActionText = "Search Businesses"
+  // secondaryActionText = "LOCATION"
 }) => {
   return (
     <Container>
@@ -76,10 +78,17 @@ export default ({
               <a href={primaryActionUrl} className="action primaryAction">
                 {primaryActionText}
               </a>
-              <a href={secondaryActionUrl} className="action secondaryAction">
+              {/* <a href={secondaryActionUrl} className="action secondaryAction">
                 {secondaryActionText}
-              </a>
+              </a> */}
             </Actions>
+            {/* <div>
+              <br></br>
+              
+              <span><FontAwesomeIcon icon={faAccessibleIcon} /> :
+                Location</span> 
+              <span>hey</span>
+              </div> */}
           </Content>
         </LeftColumn>
         <RightColumn></RightColumn>

@@ -46,22 +46,22 @@ const CustomersLogoStrip = styled.div`
 `;
 
 export default ({ roundedHeaderButton }) => {
-  return (
+  return ( 
     <>
       <Header roundedHeaderButton={roundedHeaderButton} />
       <Container>
         <TwoColumn>
           <LeftColumn>
             <Heading>
-              Beautiful React Templates <span tw="text-primary-500">for you.</span>
+              Services <span tw="text-primary-500">for you.</span>
             </Heading>
             <Paragraph>
-              Our templates are easy to setup, understand and customize. Fully modular components with a variety of
-              pages and components.
+            We bring businesses in the service industry across the world to you. As a businesss,
+             we present you to potential clients. A seamless, all in one application for your business needs.
             </Paragraph>
             <Actions>
-              <input type="text" placeholder="Your E-mail Address" />
-              <button>Get Started</button>
+              <input type="text" placeholder="Find business near you" />
+              <button>Search</button>
             </Actions>
             <CustomersLogoStrip>
               <p>Our TRUSTED Customers</p>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, InputGroup, Form, Container } from "@themesberg/react-bootstrap";
+import { Button, InputGroup, Form } from "@themesberg/react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, } from '@fortawesome/free-solid-svg-icons';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
@@ -33,9 +33,9 @@ const localizer = momentLocalizer(moment)
 export default ({navLinks = [
         <NavLinks key={1}>
           <NavLink href="/about">About</NavLink>
-          <NavLink href="blog">Blog</NavLink>
-          <NavLink href="pricing">Pricing</NavLink>
-          <NavLink href="login">Login</NavLink>
+          <NavLink href="/contact">Contact</NavLink>
+          <NavLink href="/pricing">Pricing</NavLink>
+          <NavLink href="/login">Login</NavLink>
         </NavLinks>
       ]}) => {
     
@@ -43,12 +43,34 @@ export default ({navLinks = [
     const [date, setDate] = useState(new Date());
     const myEventsList = [
       {
+        start: moment().date(24),
+        end: moment()
+          .add(5, "days")
+          .toDate(),
+        title: "Blocked"
+      },
+      {
         start: moment().toDate(),
         end: moment()
-          .add(1, "hours")
+          .add(2, "hours")
           .toDate(),
-        title: "Wash Hair"
-      }
+        title: "changed"
+      },
+      {
+        start: moment().date(15).toDate(),
+        end: moment()
+          .add(4, "days")
+          .toDate(),
+        title: "Taken"
+      },
+      {
+        start: moment().date(21).toDate(),
+        end: moment()
+          .add(3, "hours")
+          .toDate(),
+        title: "Retouch tips"
+      },
+      
     ]
 
     return (

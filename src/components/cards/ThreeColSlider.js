@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons";
-import { ReactComponent as PriceIcon } from "feather-icons/dist/icons/dollar-sign.svg";
+// import { ReactComponent as PriceIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 import { ReactComponent as LocationIcon } from "feather-icons/dist/icons/map-pin.svg";
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
+import axios from "axios";
+import { baseUrl } from "contexts/StaffContext";
+
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
@@ -65,7 +69,9 @@ const IconContainer = styled.div`
 const Text = tw.div`ml-2 text-sm font-semibold text-gray-800`;
 
 const PrimaryButton = tw(PrimaryButtonBase)`mt-auto sm:text-lg rounded-none w-full rounded sm:rounded-none sm:rounded-br-4xl py-3 sm:py-6`;
-export default () => {
+
+
+const  Businesses =  () => {
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [sliderRef, setSliderRef] = useState(null);
   const sliderSettings = {
@@ -87,6 +93,23 @@ export default () => {
       },
     ]
   };
+
+  const [business, setBusinesses] = useState([])
+  useEffect(() => {
+    const getBusinesses = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}/business/all`)
+
+            const {businesses} = response.data
+            console.log(businesses)
+            setBusinesses(businesses)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    getBusinesses()
+
+}, [])
 
   /* Change this according to your needs */
   const cards = [
@@ -128,22 +151,22 @@ export default () => {
     <Container>
       <Content>
         <HeadingWithControl>
-          <Heading>Popular Services</Heading>
+          <Heading>Popular Businesses</Heading>
           <Controls>
             <PrevButton onClick={sliderRef?.slickPrev}><ChevronLeftIcon/></PrevButton>
             <NextButton onClick={sliderRef?.slickNext}><ChevronRightIcon/></NextButton>
           </Controls>
         </HeadingWithControl>
         <CardSlider ref={setSliderRef} {...sliderSettings}>
-          {cards.map((card, index) => (
-            <Card key={index}>
-              <CardImage imageSrc={card.imageSrc} />
+          {business.map(b => (
+            <Card key={b._id}>
+              {/* <CardImage imageSrc={"https://images.fresha.com/locations/location-profile-images/343195/428815/99ddb1f6-bfe0-4e9a-ad20-62f63e4c1419.jpg?class=width-large"} /> */}
               <TextInfo>
                 <TitleReviewContainer>
-                  <Title>{card.title}</Title>
+                  <Title>{b.name}</Title>
                   <RatingsInfo>
                     <StarIcon />
-                    <Rating>{card.rating}</Rating>
+                    <Rating>{b.rating}</Rating>
                   </RatingsInfo>
                 </TitleReviewContainer>
                 <SecondaryInfoContainer>
@@ -151,18 +174,22 @@ export default () => {
                     <IconContainer>
                       <LocationIcon />
                     </IconContainer>
-                    <Text>{card.locationText}</Text>
+                    <Text>{b.country}</Text>
                   </IconWithText>
-                  {/* <IconWithText>
+                  <IconWithText>
                     <IconContainer>
-                      <PriceIcon />
+                      {/* <PriceIcon /> */}
                     </IconContainer>
-                    <Text>{card.pricingText}</Text>
-                  </IconWithText> */}
+                    <Text>REG: {b.regNumber}</Text>
+                  </IconWithText>
                 </SecondaryInfoContainer>
-                <Description>{card.description}</Description>
+                <Description>{b.description}</Description>
               </TextInfo>
-              <PrimaryButton>Book Now</PrimaryButton>
+              {/* <Card.Link className="fw-bold"> */}
+              <PrimaryButton>
+                <a href="/book">Book Now</a>
+                </PrimaryButton>
+              {/* </Card.Link> */}
             </Card>
           ))}
         </CardSlider>
@@ -170,3 +197,6 @@ export default () => {
     </Container>
   );
 };
+
+
+export default Businesses;

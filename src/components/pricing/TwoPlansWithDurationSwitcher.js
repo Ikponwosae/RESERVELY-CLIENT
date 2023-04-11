@@ -71,9 +71,9 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 export default ({
   subheading = "Pricing",
   heading = "Flexible Plans.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  description = "Suitable plans that won't break the bank. You're a small business! We're here to support you.",
   plans = null,
-  primaryButtonText = "Buy Now",
+  primaryButtonText = "Purchase",
   planDurations = [
     {
       text: "Month",
@@ -88,15 +88,15 @@ export default ({
   const defaultPlans = [
     {
       name: "Free Plan",
-      durationPrices: ["$0", "$0"],
-      mainFeature: "For Personal Blogs",
-      features: ["30 Templates", "7 Landing Pages", "12 Internal Pages", "Basic Assistance"]
+      durationPrices: ["0", "0"],
+      mainFeature: "Team size 0 -12",
+      features: ["Staff Calendar view", "Basic Assistance", "No Updates"]
     },
     {
       name: "Pro Plan",
-      durationPrices: ["$49", "$499"],
-      mainFeature: "Suited for Production Websites",
-      features: ["60 Templates", "8 Landing Pages", "22 Internal Pages", "Priority Assistance", "Lifetime Updates"],
+      durationPrices: ["4,900", "40,500"],
+      mainFeature: "Team size 13 - 40",
+      features: ["Staff Calendar view", "Staff Reporting", "Admin suspend staff", "Priority Assistance", "Lifetime Updates"],
       featured: true
     }
   ];

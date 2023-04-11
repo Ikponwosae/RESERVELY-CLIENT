@@ -55,8 +55,9 @@ import Tooltips from "pages/components/Tooltips";
 import Tabs from "pages/components/Tabs";
 import MyCalendar from "components/Calendar";
 
-import ComponentRenderer from "ComponentRenderer.js";
+// import ComponentRenderer from "ComponentRenderer.js";
 import ThankYouPage from "ThankYouPage.js";
+import Business from "pages/mainPages/Business";
 
 //Shop-OWNER
 import Staff from "./pages/shopOwner/staff"
@@ -66,6 +67,7 @@ import AddService from "./pages/shopOwner/addService"
 import EditService from "pages/shopOwner/editService"
 import Waitlist from "./pages/shopOwner/waitlist"
 import OwnerDashboard from "pages/shopOwner/OwnerDashboard";
+import OwnerCalendar from "pages/shopOwner/OwnerCalendar";
 
 //STAFF
 import BookAppointments from "pages/Staffs/BookAppointments";
@@ -135,6 +137,7 @@ export default function App() {
               <Route path="shop-owner/add-service" element={<AddService />} />
               <Route path="shop-owner/services/edit/:id" element={<EditService />} />
               <Route path="shop-owner/waitlist" element={<Waitlist />} />
+              <Route path="shop-owner/calendar" element={<OwnerCalendar />} />
             </Route>
 
             <Route path="/book" element={<BookAppointment />} />
@@ -142,12 +145,13 @@ export default function App() {
             <Route path="/components/tabs" element={<Tabs />} />
              
 
-            <Route path="/books" element={<BookAppointments />} />
+            {/* <Route path="/books" element={<BookAppointments />} /> */}
             <Route path="/staff/dashboard" element={<Dashboards />} />
             <Route path="/components/tabs" element={<Tabs />} />
 
             {/* home pages */}
             <Route path="/" element={<HotelTravelLandingPage />} />
+            <Route path="/business" element={<Business />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
 
 

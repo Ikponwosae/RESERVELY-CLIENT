@@ -8,17 +8,14 @@ import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
 import axios from "axios";
 import { baseUrl } from "./staff";
-import jwtDecode from "jwt-decode";
 import format from "date-fns/format";
 
 
 const token = localStorage.getItem('token')
-const decodedToken = jwtDecode(token)
 
 
 const GetWaitlist =  () => {
-    const [waitlist, setWaitlist] = useState([])
-    const [users, setUsers] = useState([])
+    const [appoints, setAppoints] = useState([])
 
     useEffect(() => {
         const waitlist = async () => {
@@ -31,25 +28,41 @@ const GetWaitlist =  () => {
     
                 const {waitlist} = response.data
                 console.log(waitlist)
-                setWaitlist(waitlist)
+                
+                let appoints = []
+                waitlist.forEach((a) => {
+                    a.users.forEach(async (u) => {
+                    let user = await getUser(u)
+                    appoints.push({
+                    id: a._id,
+                    bookDate: a.bookDate,
+                    endTime: a.endTime,
+                    startTime: a.startTime,
+                    userName: (user.firstName + " " + user.lastName),
+                    userEmail: user.email,
+                })
+                setAppoints(appoints)
+                console.log(appoints)
+         })
+      })
+
             } catch (e) {
                 console.error(e)
+            }
+        }
+        const getUser = async(userId) => {
+            try {
+                const response = await axios.get(`${baseUrl}/auth/user/${userId}`)
+                const { user } = response.data
+                return user;
+            } catch (error) {
+                console.log(error)
             }
         }
         waitlist()
 
     }, [])
 
-    const getUser = async(userId) => {
-        try {
-            const response = await axios.get(`${baseUrl}/auth/user/${userId}`)
-            const { user } = response.data
-            console.log(user)
-            return user;
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
 
     const [showDefault, setShowDefault] = useState(false);
@@ -117,27 +130,27 @@ const GetWaitlist =  () => {
                                 <th className="border-bottom">Customer Name</th>
                                 <th className="border-bottom">Email</th>
                                 <th className="border-bottom">Date Booked</th>
-                                <th className="border-bottom">Service</th>
+                                {/* <th className="border-bottom">Service</th> */}
                                 <th className="border-bottom">Start Time</th>
                                 <th className="border-bottom">End Time</th>
-                                <th className="border-bottom">Assigned Staff</th>
+                                {/* <th className="border-bottom">Assigned Staff</th> */}
                                 <th className="border-bottom">Action</th>
                             </tr>
-                            {waitlist.map(w => (
-                            <tr key={w._id}>
+                            {appoints.map(a => (
+                            <tr key={a.id}>
                                 <td>
                                     <Card.Link className="d-flex align-items-center">
                                         <div className="d-block">
-                                            <span className="fw-bold">{w.users[0]}</span>
+                                            <span className="fw-bold">{a.userName}</span>
                                         </div>
                                     </Card.Link>
                                 </td>
-                                <td><span className="fw-bold">{w.email}</span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{format(new Date(w.bookDate), 'do-MMM-yyyy')}</div></span></td>
-                                <td><span className="fw-normal"><div className="small text-gray">{w.service}</div></span></td>
-                                <td><span className="fw-normal">{format(new Date(w.startTime), 'HH:MM')}</span></td>
-                                <td><span className="fw-normal">{format(new Date(w.endTime), 'HH:MM')}</span></td>
-                                <td><span className="fw-normal">{w._id}</span></td>
+                                <td><span className="fw-bold">{a.userEmail}</span></td>
+                                <td><span className="fw-normal"><div className="small text-gray">{format(new Date(a.bookDate), 'do-MMM-yyyy')}</div></span></td>
+                                {/* <td><span className="fw-normal"><div className="small text-gray">{w.service}</div></span></td> */}
+                                <td><span className="fw-normal">{format(new Date(a.startTime), 'HH:MM')}</span></td>
+                                <td><span className="fw-normal">{format(new Date(a.endTime), 'HH:MM')}</span></td>
+                                {/* <td><span className="fw-normal">{w._id}</span></td> */}
                                 <td>
                                 <Button bsPrefix="text" href="#info" variant="info" className="m-3" onClick={() => setShowDefault(true)}>ASSIGN</Button>
                                 <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>

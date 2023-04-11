@@ -77,10 +77,10 @@ export default () => {
                 <Link href="#">FAQs</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Support</Link>
+                <Link href="/pricing">Pricing</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">About Us</Link>
+                <Link href="/about">About Us</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -122,14 +122,14 @@ export default () => {
             <ColumnHeading>Contact</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                +2348057071202
+                +234-800-reservely
               </LinkListItem>
               <LinkListItem>
-                <Link href="mailto:support@servana.com">support@Reservely.com</Link>
+                <Link href="mailto:support@servana.com">reply.reservely@gmail.com</Link>
               </LinkListItem>
-              <LinkListItem>
+              {/* <LinkListItem>
                 <Link href="#">Sales</Link>
-              </LinkListItem>
+              </LinkListItem> */}
               <LinkListItem>
                 <Link href="#">Report Abuse</Link>
               </LinkListItem>
@@ -138,8 +138,8 @@ export default () => {
         </FiveColumns>
         <Divider/>
         <CopyrightAndCompanyInfoRow>
-          <CopyrightNotice>&copy; Copyright 2020, Reservely Inc.</CopyrightNotice>
-          <CompanyInfo>An appointment scheduling company</CompanyInfo>
+          <CopyrightNotice>&copy; Copyright 2023, RESERVELY API.</CopyrightNotice>
+          {/* <CompanyInfo>An appointment scheduling company</CompanyInfo> */}
         </CopyrightAndCompanyInfoRow>
       </Content>
     </Container>

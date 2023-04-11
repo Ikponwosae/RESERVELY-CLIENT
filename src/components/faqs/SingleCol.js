@@ -41,27 +41,27 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 export default ({
   subheading = "FAQS",
   heading = "You have Questions ?",
-  description = "And we have got answers to all of them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  description = "And we have got answers to all of them.",
   faqs = [
     {
-      question: "Is lunch provided free of cost ?",
+      question: "What is Reservely, and what services does it offer?",
       answer:
-        "Yes, it is, if you have a membership with us. Otherwise it is charged as per the menu. Some limits do apply as to how much items can be included in your lunch. This limit is enough for any one person and merely exists to discourage abusal of the system."
+        "Reservely is a comprehensive online booking and scheduling platform that allows businesses and individuals to manage reservations and appointments easily."
     },
     {
-      question: "Do you have 2 Bedroom suites ?",
+      question: "What type of businesses or industries can benefit from using Reservely?",
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "Reservely is ideal for any business or individual that needs to manage appointments or reservations, including but not limited to: Salons and spas, fitness studios and gyms, etc."
     },
     {
-      question: "Are Wi-Fi costs included in the price ?",
+      question: "How easy is it to set up and use Reservely?",
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "Reservely is designed to be easy to set up and use, even for those with little to no technical experience. The platform offers a user-friendly interface and intuitive features that make it simple to manage bookings, schedule appointments, and communicate with clients. "
     },
     {
-      question: "Where can I reach you for support ?",
+      question: "Does Reservely offer customer support and assistance?",
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "Yes! Reservely offers dedicated customer support and assistance to help businesses make the most of the platform. With 24/7 support available, businesses can get the help they need whenever they need it."
     }
   ]
 }) => {

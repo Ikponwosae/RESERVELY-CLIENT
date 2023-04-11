@@ -31,6 +31,7 @@ export const Routs = {
     AddService: { path: "/shop-owner/add-service"},
     EditService: { path: "/shop-owner/services/edit/:id"},
     WaitList: { path: "/shop-owner/waitlist"},
+    Calendar: { path: "/shop-owner/calendar"},
 
     //STAFF
     StaffDashboard: { path : "Staffs/Dashboards"},
