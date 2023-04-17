@@ -1,28 +1,21 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBoxOpen, faCartArrowDown, faChartPie, faChevronDown, faClipboard, faCommentDots, faFileAlt, faPlus, faRocket, faStore } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Button, Dropdown } from '@themesberg/react-bootstrap';
-import { ChoosePhotoWidget, ProfileCardWidget } from "../components/Widgets";
-import { OwnerInfoForm } from "pages/components/Formss";
+import { OwnerInfoForm } from "components/Forms"; 
 import Sidebar from "components/Sidebar";
 import AnimationRevealPage from "helpers/AnimationRevealPage";
 import Footer from "components/Footer";
 import ScrollToTop from "components/ScrollToTop";
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
-
 
 export default () => {
   return (
     <>
-    <Sidebar />
-    <AnimationRevealPage>
-    <main className="content">
+      <Sidebar />
+      <AnimationRevealPage>
+        <main className="content">
           <ScrollToTop />
-          <OwnerInfoForm />        
+          <OwnerInfoForm />
           <Footer />
         </main>
-        </AnimationRevealPage>
+      </AnimationRevealPage>
     </>
-      
   );
 };

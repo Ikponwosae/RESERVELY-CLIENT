@@ -1,25 +1,13 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from '@themesberg/react-bootstrap';
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { useLocation, useNavigate } from "react-router-dom";
-import api from "api/api";
-import AuthService from "auth_service";
-import { Routs } from "routs";
 
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string(),
-  price: Yup.string(),
-  description: Yup.string(),
-});
-
-export const OwnerInfoForm = () => {
+export const PersonalInfoForm = () => {
 
   return (
     <Card border="light" className="bg-white shadow-sm mb-4">
@@ -148,80 +136,11 @@ export const OwnerInfoForm = () => {
             <Button variant="outline-tertiary" type="submit">Save Personal</Button>
           </div>
           </Form>
-
-          <h5 className="my-4">Business Info</h5>
-          <Form>
-          <Row>
-          <Col md={6} className="mb-3">
-              <Form.Group id="name">
-                <Form.Label>Business Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" />
-              </Form.Group>
-            </Col>
-          <Col md={6} className="mb-3">
-              <Form.Group id="website">
-                <Form.Label>Website</Form.Label>
-                <Form.Control type="text" placeholder="www.pinstogo.com" />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6} className="mb-3">
-              <Form.Group id="regNum">
-                <Form.Label>Registration Number</Form.Label>
-                <Form.Control  type="text" placeholder="AB348DEF4" />
-              </Form.Group>
-            </Col>
-            <Col md={6} className="mb-3">
-            <Form.Group className="mb-2" id="hasPhysicalAddress">
-            <Form.Label>Has Physical Adress</Form.Label>
-            <Form.Select>
-              <option defaultValue >true</option>
-              <option>false</option>
-            </Form.Select>
-          </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-          <Col md={6} className="mb-3">
-            <Form.Group className="mb-2" id="category">
-            <Form.Label>Category</Form.Label>
-            <Form.Select>
-              <option defaultValue>Open this menu</option>
-              <option>Beauty</option>
-              <option>Hair</option>
-            </Form.Select>
-          </Form.Group>
-            </Col>
-            <Col md={6} className="mb-3">
-            <Form.Group className="mb-2" id="teamSize">
-            <Form.Label>Team Size</Form.Label>
-            <Form.Control  type="number" placeholder="12" />
-          </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6} className="mb-3">
-            <Form.Group className="mb-2" id="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control  type="text" placeholder="we offer fda approved massage therapy" />
-          </Form.Group>
-            </Col>
-            <Col md={6} className="mb-3">
-            <Form.Group className="mb-2" id="image">
-            <Form.Label>Image</Form.Label>
-            <Form.Control type="file" />
-          </Form.Group>
-            </Col>
-          </Row>
-          <div className="mt-3">
-            <Button variant="outline-tertiary" type="submit">Save Business</Button>
-          </div>
-        </Form>
       </Card.Body>
     </Card>
   );
 };
 
 
-// export default OwnerInfoForm;
+
+

@@ -6,15 +6,12 @@ import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
-import { baseUrl } from "./staff";
+import api from "api/api";
+import AuthService from "auth_service";
+import { useNavigate } from "react-router-dom";
+import { Routs } from "routs";
 
-
-const token = localStorage.getItem('token');
-
-const headers = {
-  'Authorization': `Bearer ${token}`
-}
+const { getCurrentUser, getCurrentToken} = AuthService
 
 const initialValues = {
   name: '',
@@ -27,25 +24,19 @@ const validationSchema = Yup.object().shape({
 });
 
 const InviteStaff = () => {
-  const invite = async (staffEmail, name) => {
-    try {
-      const response = await axios.post(`${baseUrl}/owner/invite`, {staffEmail: staffEmail, name: name},
-       {
-        headers: headers
-      });
-      console.log(response)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const [loading, setLoading] = useState(false);
-
-  const handleFormSubmit = (values) =>{
-    setLoading(true);
-
+  const navigate = useNavigate()
+  const handleFormSubmit = async (values) =>{
+    setLoading(true); 
     try {
-      invite(values.staffEmail, values.name);
+      const config = {
+        headers: { 
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${getCurrentToken()}`
+        },
+      };
+      const body = values;
+      await api.post(`/owner/invite/`, body, config);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -54,6 +45,7 @@ const InviteStaff = () => {
     <React.Fragment>
       <Alert variant="success">Staff Invite has been sent!</Alert>
     </React.Fragment>
+    navigate(Routs.Staff.path)
     window.alert("Staff invite has been sent!")
   }
 
@@ -106,7 +98,9 @@ const InviteStaff = () => {
                 </Row>
                 <Row className="justify-content-md-center">
                 <Col xs={12} sm={6} xl={4} className="mb-4">
-                    <Button variant="outline-tertiary" type="submit" loading={loading} size="lg" className="me-1">SEND INVITE</Button> 
+                    <Button variant="outline-tertiary" type="submit" size="lg" className="me-1">
+                      {loading ? <>INVITING..</> : <>SEND INVITE</>}
+                      </Button> 
                 </Col>
                 </Row>
             </Form>

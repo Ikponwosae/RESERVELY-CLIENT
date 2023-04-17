@@ -6,29 +6,31 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import Sidebar from "components/Sidebar";
 import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
-import axios from "axios";
-import { baseUrl } from "./staff";
 import format from "date-fns/format";
+import api from "api/api";
+import AuthService from "auth_service";
 
-
-const token = localStorage.getItem('token')
-
+const { getCurrentToken, getCurrentUser} = AuthService
 
 const GetWaitlist =  () => {
     const [appoints, setAppoints] = useState([])
-
+    const [available, setAvailable] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [empty, setEmpty] = useState(false)
+    const [appId, setAppId] = useState('')
     useEffect(() => {
+        setLoading(true)
         const waitlist = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/owner/waitlist`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    } 
-                })
-    
+                const config = {
+                    headers: { 
+                      "Content-Type": "application/json",
+                      'Authorization': `Bearer ${getCurrentToken()}`
+                    },
+                  };
+                const response = await api.get("/owner/waitlist/", config)
                 const {waitlist} = response.data
-                console.log(waitlist)
-                
+
                 let appoints = []
                 waitlist.forEach((a) => {
                     a.users.forEach(async (u) => {
@@ -42,17 +44,18 @@ const GetWaitlist =  () => {
                     userEmail: user.email,
                 })
                 setAppoints(appoints)
+                setLoading(false)
                 console.log(appoints)
          })
       })
-
             } catch (e) {
+                setLoading(false)
                 console.error(e)
             }
         }
         const getUser = async(userId) => {
             try {
-                const response = await axios.get(`${baseUrl}/auth/user/${userId}`)
+                const response = await api.get(`/auth/user/${getCurrentUser().id}`)
                 const { user } = response.data
                 return user;
             } catch (error) {
@@ -60,11 +63,58 @@ const GetWaitlist =  () => {
             }
         }
         waitlist()
-
     }, [])
 
+    const availables = async (date, startT, endT) => {
+        try {
+            const config = {
+                headers: { 
+                  "Content-Type": "application/json",
+                  'Authorization': `Bearer ${getCurrentToken()}`
+                },
+              };
+              const book = format(new Date(date), 'yyyy-MM-dd')
+              const start = format(new Date(startT), 'HH:MM')
+              const end = format(new Date(endT), 'HH:MM')
+              const response = await api.get(`owner/staff/available/${book}?startTime=${start}&endTime=${end}`, config)
+              const { availableStaff } = response.data
+              if(availableStaff == null) {
+                setEmpty(true)
+              }
+              const results = []
+              availableStaff.forEach((s) => {
+                results.push({
+                    id: s._id,
+                    name: (s.firstName + s.lastName)
+                })
+              })
+              setAvailable(results)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-
+    const assign = async (id, staffId, book, start, end) => {
+        try {
+            const config = {
+                headers: { 
+                  "Content-Type": "application/json",
+                  'Authorization': `Bearer ${getCurrentToken()}`
+                },
+              };
+              const body = {
+                staffId: staffId,
+                bookDate: book,
+                startTime: start,
+                endTime: end
+              }
+              await api.patch(`appointment/${id}/approve/`, body, config)
+              window.location.reload(true)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
     const [showDefault, setShowDefault] = useState(false);
     const handleClose = () => setShowDefault(false);
     return (
@@ -81,7 +131,7 @@ const GetWaitlist =  () => {
                 <Breadcrumb.Item active>WaitList</Breadcrumb.Item>
             </Breadcrumb>
             <h4>Appointments Wait List</h4>
-            <p className="mb-0">All the appointments booked by your customers waiting for approval.</p>
+            <p className="mb-0 font-large fw-bold">All the appointments booked by your customers waiting for approval.</p>
             </div>
             </div>
 
@@ -136,6 +186,7 @@ const GetWaitlist =  () => {
                                 {/* <th className="border-bottom">Assigned Staff</th> */}
                                 <th className="border-bottom">Action</th>
                             </tr>
+                    {loading ? <>Loading..</> : <>
                             {appoints.map(a => (
                             <tr key={a.id}>
                                 <td>
@@ -152,7 +203,11 @@ const GetWaitlist =  () => {
                                 <td><span className="fw-normal">{format(new Date(a.endTime), 'HH:MM')}</span></td>
                                 {/* <td><span className="fw-normal">{w._id}</span></td> */}
                                 <td>
-                                <Button bsPrefix="text" href="#info" variant="info" className="m-3" onClick={() => setShowDefault(true)}>ASSIGN</Button>
+                                <Button bsPrefix="text" variant="info" className="m-3" 
+                                onClick={() => {
+                                    setShowDefault(true);
+                                    availables(a.bookDate, a.startTime, a.endTime);
+                                } }>ASSIGN</Button>
                                 <Modal as={Modal.Dialog} centered show={showDefault} onHide={handleClose}>
                                     <Modal.Header>
                                     <Modal.Title className="h6">Assign</Modal.Title>
@@ -161,17 +216,18 @@ const GetWaitlist =  () => {
                                     <Modal.Body>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Availabe Staff</Form.Label>
-                                        <Form.Select>
+                                        <Form.Select value={appId} onChange={(e) => setAppId(e.target.value)}>
                                         <option defaultValue>Select a staff to assign(who is free)</option>
-                                        <option>Jode Jelly</option>
-                                        <option>Rigby Singh</option>
-                                        <option>Ava Max</option>
+                                        {available.map((staff) => <option key={staff.id} value={staff.id}>{staff.name}</option>)}
                                         </Form.Select>
                                     </Form.Group>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose}>
-                                        ASSIGN
+                                    <Button variant="secondary" onClick={() => {
+                                        handleClose()
+                                        assign(a.id, appId, a.bookDate, a.startTime, a.endTime)
+                                    } }>
+                                        ASSIGN & APPROVE
                                     </Button>
                                     <Button variant="link" className="text-gray ms-auto" onClick={handleClose}>
                                         CLOSE
@@ -179,11 +235,12 @@ const GetWaitlist =  () => {
                                     </Modal.Footer>
                                 </Modal>
                                  | 
-                                 <Button bsPrefix="text" href="#info" variant="danger" className="m-3" >APPROVE </Button>
+                                 <Button bsPrefix="text" variant="danger" className="m-3" disabled={empty} >RESCHEDULE</Button>
                                  
                                 </td>
                             </tr>
                         ))}
+                            </>}
                         </thead>
                         <tbody>
 

@@ -1,13 +1,10 @@
-
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChessBishop } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Card, Image, Button, Container } from '@themesberg/react-bootstrap';
-
+import { Col, Row, Button, Container } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import { Routs } from "../../routs";
-// import SentImage from "../../assets/img/illustrations/500.svg";
 
 
 export default () => {
@@ -29,7 +26,7 @@ export default () => {
                   We have sent an email to verify your registration. Check your email and
                   follow the prompts.
             </p>
-                <Button as={Link} variant="primary" className="animate-hover" to={Routs.HomePage.path}>
+                <Button as={Link} variant="primary" className="animate-hover" to={Routs.Home.path}>
                   <FontAwesomeIcon icon={faChevronLeft} className="animate-left-3 me-3 ms-2" />
                   Go back home
                 </Button>

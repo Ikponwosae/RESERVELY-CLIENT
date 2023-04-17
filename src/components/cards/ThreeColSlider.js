@@ -10,8 +10,9 @@ import { ReactComponent as LocationIcon } from "feather-icons/dist/icons/map-pin
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
-import axios from "axios";
-import { baseUrl } from "contexts/StaffContext";
+import { baseUrl } from "pages/shopOwner/staff";
+import api from "api/api";
+import { ca } from "date-fns/locale";
 
 
 const Container = tw.div`relative`;
@@ -98,10 +99,12 @@ const  Businesses =  () => {
   useEffect(() => {
     const getBusinesses = async () => {
         try {
-            const response = await axios.get(`${baseUrl}/business/all`)
+          const config = {
+            headers: { "Content-Type": "application/json" },
+          };
+            const response = await api.get("/business/all/", config)
 
             const {businesses} = response.data
-            console.log(businesses)
             setBusinesses(businesses)
         } catch (e) {
             console.error(e)
@@ -158,15 +161,16 @@ const  Businesses =  () => {
           </Controls>
         </HeadingWithControl>
         <CardSlider ref={setSliderRef} {...sliderSettings}>
-          {business.map(b => (
-            <Card key={b._id}>
+          {business.map(business => (
+            <Card key={business._id}>
+              <CardImage imageSrc={cards[Math.floor(Math.random() * 3)].imageSrc} />
               {/* <CardImage imageSrc={"https://images.fresha.com/locations/location-profile-images/343195/428815/99ddb1f6-bfe0-4e9a-ad20-62f63e4c1419.jpg?class=width-large"} /> */}
               <TextInfo>
                 <TitleReviewContainer>
-                  <Title>{b.name}</Title>
+                  <Title>{business.name}</Title>
                   <RatingsInfo>
                     <StarIcon />
-                    <Rating>{b.rating}</Rating>
+                    <Rating>{Math.round((Math.random() * 5* 10)) / 10}</Rating>
                   </RatingsInfo>
                 </TitleReviewContainer>
                 <SecondaryInfoContainer>
@@ -174,20 +178,15 @@ const  Businesses =  () => {
                     <IconContainer>
                       <LocationIcon />
                     </IconContainer>
-                    <Text>{b.country}</Text>
+                    <Text>{business.country}</Text>
                   </IconWithText>
-                  <IconWithText>
-                    <IconContainer>
-                      {/* <PriceIcon /> */}
-                    </IconContainer>
-                    <Text>REG: {b.regNumber}</Text>
-                  </IconWithText>
+                  
                 </SecondaryInfoContainer>
-                <Description>{b.description}</Description>
+                <Description>{business.description}</Description>
               </TextInfo>
               {/* <Card.Link className="fw-bold"> */}
               <PrimaryButton>
-                <a href="/book">Book Now</a>
+                <a href={"/business/" + business._id} >Book Now</a>
                 </PrimaryButton>
               {/* </Card.Link> */}
             </Card>
