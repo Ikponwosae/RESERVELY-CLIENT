@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -43,20 +44,6 @@ export default () => {
       </div>
 
       <Row className="justify-content-md-center">
-        {/* <Col xs={12} className="mb-4 d-none d-sm-block">
-          <SalesValueWidget
-            title="Sales Value"
-            value="10,567"
-            percentage={10.57}
-          />
-        </Col>
-        <Col xs={12} className="mb-4 d-sm-none">
-          <SalesValueWidgetPhone
-            title="Sales Value"
-            value="10,567"
-            percentage={10.57}
-          />
-        </Col> */}
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
             category="Appointments"
@@ -94,14 +81,6 @@ export default () => {
                 <Col xs={12} className="mb-4">
                   <PageVisitsTable />
                 </Col>
-
-                {/* <Col xs={12} lg={6} className="mb-4">
-                  <TeamMembersWidget />
-                </Col> */}
-
-                {/* <Col xs={12} lg={6} className="mb-4">
-                  <ProgressTrackWidget />
-                </Col> */}
               </Row>
             </Col>
 
@@ -114,14 +93,6 @@ export default () => {
                     percentage={18.2}
                     data={totalOrders} />
                 </Col>
-
-                {/* <Col xs={12} className="px-0 mb-4">
-                  <RankingWidget />
-                </Col> */}
-
-                {/* <Col xs={12} className="px-0">
-                  <AcquisitionWidget />
-                </Col> */}
               </Row>
             </Col>
           </Row>

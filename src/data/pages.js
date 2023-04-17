@@ -18,7 +18,7 @@ export default [
         "id": 1,
         "name": "Overview",
         "image": OverviewImg,
-        "link": Routs.DashboardOverview.path
+        "link": Routs.Home.path
     },
     {
         "id": 2,

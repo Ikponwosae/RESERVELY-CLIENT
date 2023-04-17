@@ -8,14 +8,12 @@ import ScrollToTop from "components/ScrollToTop";
 import Footer from "components/Footer";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
-import { baseUrl } from "./staff";
+import api from "api/api";
+import AuthService from "auth_service";
+import { useNavigate } from "react-router-dom";
+import { Routs } from "routs";
 
-const token = localStorage.getItem('token');
-
-const headers = {
-  'Authorization': `Bearer ${token}`
-}
+const { getCurrentUser, getCurrentToken} = AuthService
 
 const initialValues = {
     name: '',
@@ -31,35 +29,28 @@ const validationSchema = Yup.object().shape({
     description: Yup.string().required()
 });
 
-
 const AddService =  () => {
-    const add = async (name, duration, price, description) => {
-        try {
-          const response = await axios.post(`${baseUrl}/owner/add-service`,{
-            name: name, duration: duration, price: price, description: description
-          },{headers: headers})
-          console.log(response)
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    
-      const [loading, setLoading] = useState(false);
-    
-      const handleFormSubmit = (values) =>{
-        setLoading(true);
-    
-        try {
-          add(values.name, values.duration, values.price, values.description);
-          setLoading(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+    const handleFormSubmit = async (values) =>{
+      setLoading(true);
+      try {
+        const config = {
+          headers: { 
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${getCurrentToken()}`
+          },
+        };
+        const body = values;
+        await api.post(`/owner/add-service/`, body, config);
+        setLoading(false);
         } catch (error) {
           console.log(error);
           setLoading(false);
         }
+        navigate(Routs.Services.path)
         window.alert("Successful! Service created!")
       }
-
-
 
     return (
         <>
@@ -157,7 +148,9 @@ const AddService =  () => {
                 </Row>
                                 
                 <Row className="justify-content-md-center">
-                    <Button variant="outline-tertiary" size="lg" type="submit" loading={loading} className="me-1">ADD</Button>
+                    <Button variant="outline-tertiary" size="lg" type="submit" className="me-1">
+                      {loading ? <>Adding..</> : <>ADD</>}
+                      </Button>
                 </Row>
             </Form>
             )}

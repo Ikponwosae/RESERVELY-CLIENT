@@ -1,17 +1,12 @@
 export const Routs = {
     // pages
-    Presentation: { path: "/" },
+    Home: { path: "/" },
     Pricing: { path: "/pricing"},
     ContactUsPage: { path: "/contact"},
-    HomePage: { path: "/"},
-    DashboardOverview: { path: "/dashboard-overview" },
     Transactions: { path: "/transactions" },
-    Settings: { path: "/settings" },
     Upgrade: { path: "/upgrade" },
     Users: { path: "/users"},
     BootstrapTables: { path: "/tables/bootstrap-tables" },
-    Billing: { path: "/billing" },
-    Invoice: { path: "/invoice" },
     Signin: { path: "/login" },
     Signup: { path: "/signup" },
     RegisterBusiness: { path: "/register-business/:id"},
@@ -22,8 +17,9 @@ export const Routs = {
     ServerError: { path: "/500" },
     EmailSent: { path: "/send-verify" },
     CompleteRegistration: { path: "/complete-registration/:token" },
-
+    
     //SHOP OWNER
+    Settings: { path: "owner/settings" },
     ShopOwnerDashboard :{ path: "/shop-owner/dashboard"},
     Staff : { path: "/shop-owner/staff"},
     InviteStaff : { path: "/shop-owner/invite-staff"},
@@ -34,10 +30,10 @@ export const Routs = {
     Calendar: { path: "/shop-owner/calendar"},
 
     //STAFF
-    StaffDashboard: { path : "Staffs/Dashboards"},
+    StaffDashboard: { path : "/staff/dashboard"},
 
     //USER
-    UserDashboard: { path : "user/dashboard"},
+    UserDashboard: { path : "/user/dashboard"},
 
     // docs
     // DocsOverview: { path: "/documentation/overview" },

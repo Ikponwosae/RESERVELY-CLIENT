@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBusinessTime, faCalendarTimes, faEnvelopeOpenText, faFlag, faPeopleArrows, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
@@ -7,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Routs } from "../../routs";
-import useAuth from "hooks/useAuth";
+import api from "api/api";
+import AuthService from "auth_service";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
+
+const { getCurrentUser, setWithExpiry} = AuthService
 
 //initial credentials
 const initialValues = {
@@ -38,28 +40,20 @@ const validationSchema = Yup.object().shape({
 });
 
 const BusinessReg = () => {
-  const { registerBusiness } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async (values) => {
     setLoading(true);
 
     try {
-      registerBusiness(
-        values.name,
-        values.hasPhysicalAddress,
-        values.category,
-        values.description,
-        values.website,
-        values.regNumber,
-        values.country,
-        values.openHour,
-        values.closeHour,
-        values.teamSize
-        );
-        navigate(Routs.Signin.path);
-        setLoading(false);
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      const body = values;
+      await api.post(`/auth/register/business/${getCurrentUser()._id}`, body, config);
+      navigate(Routs.Signin.path);
+      setLoading(false);
     } catch (e) {
       console.log(e);
       setLoading(false);
@@ -249,8 +243,8 @@ const BusinessReg = () => {
                     </FormCheck.Label>
                   </FormCheck> 
 
-                  <Button variant="outline-primary" type="submit" loading={loading} className="w-100">
-                    Register Business
+                  <Button variant="outline-primary" type="submit" className="w-100">
+                  {loading ? <>Registering..</> : <>Register Business</>}
                   </Button>
                 </Form>
               )}
