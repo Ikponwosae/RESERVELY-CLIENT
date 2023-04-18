@@ -21,7 +21,6 @@ import api from "api/api";
 import AuthService from "auth_service";
 import { Routs } from "routs";
 
-
 const validationSchema = Yup.object().shape({
   name: Yup.string(),
   price: Yup.string(),

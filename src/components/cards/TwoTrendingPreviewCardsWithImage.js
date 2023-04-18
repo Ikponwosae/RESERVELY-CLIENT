@@ -86,7 +86,7 @@ export default () => {
             <HeadingInfoContainer>
               <HeadingTitle>Trending Services</HeadingTitle>
               <HeadingDescription>
-              Don't miss out on the best of the best - explore our trending services.
+              Don't miss out on the best of the best - explore the trending services on Reservely.
               </HeadingDescription>
               <PrimaryLink>
                 View All <ArrowRightIcon />

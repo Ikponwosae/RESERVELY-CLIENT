@@ -8,11 +8,13 @@ import { faCog, faHandHoldingUsd, faSignOutAlt, faTimes, faUser, faTools, faPeop
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link, useNavigate  } from 'react-router-dom';
 import Logo from "assets/img/brand/r-logo.jpg"
-
+import api from "api/api";
+import AuthService from "auth_service";
 import { Routs } from "../routs";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
+
 
 export default (props = {}) => {
   const location = useLocation();
@@ -94,7 +96,7 @@ export default (props = {}) => {
                   <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" />
                 </div>
                 <div className="d-block">
-                  <h6>Hi, Jane</h6>
+                  <h6>...</h6>
                   <Button as={Link} variant="secondary" size="xs" to={Routs.Signin.path} className="text-dark">
                     <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out
                   </Button>
@@ -105,7 +107,7 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="business name" link={'/'} image={ReactHero} />
+              <NavItem title="RESERVELY" link={'/'} image={ReactHero} />
 
               <NavItem title="Dashboard" link={Routs.ShopOwnerDashboard.path} icon={faChartLine} />
               

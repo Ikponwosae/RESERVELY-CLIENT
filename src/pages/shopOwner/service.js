@@ -31,7 +31,7 @@ const GetServices = () => {
         const response = await api.get(`/business/${getCurrentUser().business}/services`,
           {
             headers: {
-              Authorization: `Bearer ${getCurrentToken()}`,
+              'Authorization': `Bearer ${getCurrentToken()}`,
             },
           }
         );

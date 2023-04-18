@@ -1,5 +1,6 @@
 import React from "react";
-import { OwnerInfoForm } from "components/Forms"; 
+import OwnerInfoForm from "components/OwnerInfoForm"; 
+import BusinessInfoForm from "components/BusinessInfoForm";
 import Sidebar from "components/Sidebar";
 import AnimationRevealPage from "helpers/AnimationRevealPage";
 import Footer from "components/Footer";
@@ -13,6 +14,7 @@ export default () => {
         <main className="content">
           <ScrollToTop />
           <OwnerInfoForm />
+          <BusinessInfoForm />
           <Footer />
         </main>
       </AnimationRevealPage>

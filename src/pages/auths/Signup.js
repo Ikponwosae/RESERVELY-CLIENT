@@ -11,7 +11,7 @@ import { Routs } from "../../routs";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import AuthService from "auth_service";
 
-const { getCurrentUser, setWithExpiry } = AuthService;
+// const { getCurrentUser, setWithExpiry } = AuthService;
 
 // inital login credentials
 const initialValues = {

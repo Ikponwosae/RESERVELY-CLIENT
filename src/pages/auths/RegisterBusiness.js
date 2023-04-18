@@ -11,7 +11,6 @@ import AuthService from "auth_service";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
 
-const { getCurrentUser, setWithExpiry} = AuthService
 
 //initial credentials
 const initialValues = {
@@ -30,28 +29,30 @@ const initialValues = {
 //form field validations
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-    .required('Business name is required!'),
+  .required('Business name is required!'),
   hasPhysicalAddress: Yup.string()
-    .required('Field is required!'),
+  .required('Field is required!'),
   openHour: Yup.string()
-    .required('Opening Hour is required!'),
+  .required('Opening Hour is required!'),
   closeHour: Yup.string()
   .required('Closing hour is required!'),
 });
 
 const BusinessReg = () => {
+  const { getCurrentUser} = AuthService
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  console.log(loading)
   const handleFormSubmit = async (values) => {
     setLoading(true);
-
     try {
       const config = {
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json"}
       };
       const body = values;
-      await api.post(`/auth/register/business/${getCurrentUser()._id}`, body, config);
+      await api.post(`/auth/register/business/${getCurrentUser().id}`, body, config);
       navigate(Routs.Signin.path);
       setLoading(false);
     } catch (e) {
@@ -76,7 +77,7 @@ const BusinessReg = () => {
               validationSchema={validationSchema}
               >  
               {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-                <Form className="mt-4">
+                <Form className="mt-4" onSubmit={handleSubmit}>
                 <Form.Group id="name" className="mb-4">
                     <Form.Label>Business Name</Form.Label>
                     <InputGroup>
@@ -101,7 +102,7 @@ const BusinessReg = () => {
                         <FontAwesomeIcon icon={faFirefoxBrowser} />
                       </InputGroup.Text>
                       <Form.Control autoFocus type="text"
-                      name="websitw"
+                      name="website"
                       onBlur={handleBlur}
                       value={values.website}
                       onChange={handleChange}
@@ -110,7 +111,7 @@ const BusinessReg = () => {
                       placeholder="www.pins.com.ng" />
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group id="regNum" className="mb-4">
+                  <Form.Group id="regNumber" className="mb-4">
                     <Form.Label>Registration Number</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
@@ -151,7 +152,8 @@ const BusinessReg = () => {
                 <option defaultValue>Open this menu</option>
                 <option value="beauty">Beauty</option>
                 <option value="hair">Hair</option>
-                <option value="shopping">Shopping</option>
+                <option value="luxury">Luxury</option>
+                <option value="aroma-therapy">Aroma-Therapy</option>
                 <option value="food">Food</option>
               </Form.Select>
               </Form.Group>
@@ -171,7 +173,7 @@ const BusinessReg = () => {
                       placeholder="We offer these services.." />
                     </InputGroup>
                 </Form.Group>
-              <Form.Group id="team" className="mb-4">
+              <Form.Group id="teamSize" className="mb-4">
                     <Form.Label>Team Size</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
@@ -203,7 +205,7 @@ const BusinessReg = () => {
                       placeholder="Nigeria" />
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group id="open" className="mb-4">
+                  <Form.Group id="openHour" className="mb-4">
                     <Form.Label>Opening Hour</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
@@ -219,7 +221,7 @@ const BusinessReg = () => {
                       placeholder="09:00" />
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group id="close" className="mb-4">
+                  <Form.Group id="closeHour" className="mb-4">
                     <Form.Label>Closing Hour</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
@@ -250,15 +252,6 @@ const BusinessReg = () => {
               )}
                 </Formik>
 
-                
-                {/* <div className="d-flex justify-content-center align-items-center mt-4">
-                  <span className="fw-normal">
-                    Already have an account?
-                    <Card.Link as={Link} to={Routs.Signin.path} className="fw-bold">
-                      {` Login here `}
-                    </Card.Link>
-                  </span>
-                </div> */}
               </div>
             </Col>
           </Row>

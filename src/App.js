@@ -65,7 +65,8 @@ import AddService from "./pages/shopOwner/addService";
 import EditService from "pages/shopOwner/editService";
 import Waitlist from "./pages/shopOwner/waitlist";
 import OwnerDashboard from "pages/shopOwner/OwnerDashboard";
-import OwnerCalendar from "pages/shopOwner/OwnerCalendar";
+// import OwnerCalendar from "pages/shopOwner/OwnerCalendar";
+import FullCalendarComponent from "pages/shopOwner/OwnerCalendar";
 
 //STAFF
 import Dashboards from "pages/Staffs/Dashboards";
@@ -125,7 +126,7 @@ export default function App() {
             element={<EditService />}
           />
           <Route path="shop-owner/waitlist" element={<Waitlist />} />
-          <Route path="shop-owner/calendar" element={<OwnerCalendar />} />
+          <Route path="shop-owner/calendar" element={<FullCalendarComponent />} />
         </Route>
 
         <Route element={<UserAuth />}>

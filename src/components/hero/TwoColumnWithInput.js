@@ -63,15 +63,13 @@ const HeroColumn = ({ roundedHeaderButton }) => {
 
   const handleFormSubmit = async (values) => {
     try {
-      const body = values;
-      const response = await api.post("/business/search/", body);
+      const response = await api.get(`/business/search/${values.search}`);
       const businesses = response.data.businesses;
       setBusinesses(businesses);
     } catch (e) {
       console.error(e);
     }
   };
-  console.log(business);
 
   const Business = (props) => {
     const { link, name, country, website } = props;
@@ -136,6 +134,7 @@ const HeroColumn = ({ roundedHeaderButton }) => {
                   </Form>
                 )}
               </Formik>
+            </Actions>
               {business.map((b) => (
                 <Business
                   key={`business-${b._id}`}
@@ -143,7 +142,6 @@ const HeroColumn = ({ roundedHeaderButton }) => {
                   link={`/business/${b._id}`}
                 />
               ))}
-            </Actions>
             <CustomersLogoStrip>
               <p>Our TRUSTED Customers</p>
               <img src={CustomersLogoStripImage} alt="Our Customers" />

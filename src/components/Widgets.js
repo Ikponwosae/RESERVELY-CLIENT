@@ -102,7 +102,6 @@ export const CounterWidget = (props) => {
 export const CircleChartWidget = (props) => {
   const { title, data = [] } = props;
   const series = data.map(d => d.value);
-
   return (
     <Card border="light" className="shadow-sm">
       <Card.Body>
@@ -115,8 +114,8 @@ export const CircleChartWidget = (props) => {
 
             {data.map(d => (
               <h6 key={`circle-element-${d.id}`} className="fw-normal text-gray">
-                <FontAwesomeIcon icon={d.icon} className={`icon icon-xs text-${d.color} w-20 me-1`} />
-                {` ${d.label} `}{`${d.value}%`}
+                {/* <FontAwesomeIcon icon={d.icon} className={`icon icon-xs text-${d.color} w-20 me-1`} /> */}
+                {` ${d.name} `} : {`${d.value}`}
               </h6>
             ))}
           </Col>
@@ -128,7 +127,7 @@ export const CircleChartWidget = (props) => {
 
 export const BarChartWidget = (props) => {
   const { title, value, percentage, data = [] } = props;
-  const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const series = data.map(d => d.value);
   const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
